@@ -137,4 +137,41 @@ void main() {
       );
     },
   );
+
+  group(
+    "logout",
+    () {
+      test(
+        "should return void when success",
+        () async {
+          when(
+            () => remoteDataSource.logout("token"),
+          ).thenAnswer(
+            (invocation) => Future.value(null),
+          );
+
+          final result = await repository.logout("token");
+          expect(result, const Right(null));
+          verify(() => remoteDataSource.logout("token"));
+          verifyNoMoreInteractions(remoteDataSource);
+        },
+      );
+
+      test(
+        "shoudl return LogoutFailure when error",
+        () async {
+          when(
+            () => remoteDataSource.logout("token"),
+          ).thenThrow(
+            LogoutException("Gagal Logout"),
+          );
+
+          final result = await repository.logout("token");
+          expect(result, Left(LogoutFailure("Gagal Logout")));
+          verify(() => remoteDataSource.logout("token"));
+          verifyNoMoreInteractions(remoteDataSource);
+        },
+      );
+    },
+  );
 }
