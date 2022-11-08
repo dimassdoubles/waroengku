@@ -101,7 +101,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       Dio dio = Dio();
       dio.options.headers["Authorization"] = "Bearer $token";
       await dio.post(endPoint);
-    } on DioError catch (e) {
+    } on DioError {
       throw LogoutException("Gagal Logout");
     }
   }
