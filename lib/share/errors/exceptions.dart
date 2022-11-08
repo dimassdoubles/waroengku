@@ -12,3 +12,8 @@ class LogoutException implements Exception {
   String message;
   LogoutException(this.message);
 }
+
+class GetCategoriesException implements Exception {
+  String message;
+  GetCategoriesException(this.message);
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/presentation/pages/login_page.dart';
-import 'package:waroengku/presentation/pages/splash_page.dart';
+import '../presentation/pages/login_page.dart';
+import '../presentation/pages/splash_page.dart';
 
 const String splashPage = "splash-page";
 const String loginPage = "login-page";

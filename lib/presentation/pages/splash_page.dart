@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/share/routes.dart';
+import '../../share/routes.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
