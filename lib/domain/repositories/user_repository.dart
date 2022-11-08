@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/user.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/user.dart';
+import '../../share/errors/failures.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, void>> register({
