@@ -18,3 +18,12 @@ class LoginFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+// ignore: must_be_immutable
+class LogoutFailure extends Failure {
+  String message;
+  LogoutFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

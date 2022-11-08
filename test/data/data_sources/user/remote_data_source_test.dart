@@ -143,4 +143,38 @@ void main() {
       );
     },
   );
+
+  group(
+    "logout",
+    () {
+      const String email = "kelompok1@gmail.com";
+      const String password = "kelompok1";
+
+      test(
+        "should success",
+        () async {
+          final user = await remoteDataSource.login(
+            email: email,
+            password: password,
+          );
+          try {
+            await remoteDataSource.logout(user.token);
+          } catch (e) {
+            expect("Logout Success", "Logout Fail");
+          }
+        },
+      );
+
+      test(
+        "should fail",
+        () async {
+          try {
+            await remoteDataSource.logout("wrong");
+            expect("Logout Fail", "Logout Success");
+            // ignore: empty_catches
+          } catch (e) {}
+        },
+      );
+    },
+  );
 }

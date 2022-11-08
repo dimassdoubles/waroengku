@@ -13,6 +13,7 @@ abstract class UserRemoteDataSource {
     required String phone,
   });
   Future<User> login({required String email, required String password});
+  Future<void> logout(String token);
 }
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
@@ -90,6 +91,18 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       return user;
     } on DioError catch (e) {
       throw LoginException(e.response!.data["info"]);
+    }
+  }
+
+  @override
+  Future<void> logout(String token) async {
+    const String endPoint = "$baseUrl/api/logout";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      await dio.post(endPoint);
+    } on DioError catch (e) {
+      throw LogoutException("Gagal Logout");
     }
   }
 }

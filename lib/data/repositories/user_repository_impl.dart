@@ -46,4 +46,13 @@ class UserRepositoryImpl extends UserRepository {
       return Left(LoginFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> logout(String token) async {
+    try {
+      return Right(await remoteDataSource.logout(token));
+    } on LogoutException catch (e) {
+      return Left(LogoutFailure(e.message));
+    }
+  }
 }
