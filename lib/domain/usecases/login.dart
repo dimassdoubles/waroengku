@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/user.dart';
-import 'package:waroengku/domain/repositories/user_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/user.dart';
+import '../repositories/user_repository.dart';
+import '../../share/errors/failures.dart';
 
 class Login {
   UserRepository repository;
