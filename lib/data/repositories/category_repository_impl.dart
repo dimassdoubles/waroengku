@@ -33,4 +33,24 @@ class CategoryRepositoryImpl extends CategoryRepository {
       return Left(NoAuthorizationFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateCategory({
+    required String token,
+    required int id,
+    required String newName,
+  }) async {
+    try {
+      final result = await remoteDataSource.updateCategory(
+        token: token,
+        id: id,
+        newName: newName,
+      );
+      return Right(result);
+    } on NotFoundException catch (e) {
+      return Left(NotFoundFailure(e.message));
+    } on NoAuthorizationException catch (e) {
+      return Left(NoAuthorizationFailure(e.message));
+    }
+  }
 }

@@ -84,4 +84,70 @@ void main() {
       );
     },
   );
+
+  group(
+    "updateCategory",
+    () {
+      test(
+        "should fail when category id is not found",
+        () async {
+          final user = await userRemoteDataSource.login(
+            email: adminEmail,
+            password: adminPassword,
+          );
+          final token = user.token;
+          try {
+            await remoteDataSource.updateCategory(
+              token: token,
+              id: 100,
+              newName: "newName",
+            );
+            expect("gagal", "sukses");
+            // ignore: empty_catches
+          } on NotFoundException {}
+        },
+      );
+
+      test(
+        "should fail when user role is not admin",
+        () async {
+          final user = await userRemoteDataSource.login(
+            email: email,
+            password: password,
+          );
+          final token = user.token;
+          try {
+            await remoteDataSource.updateCategory(
+              token: token,
+              id: 14,
+              newName: "newName",
+            );
+            expect("gagal", "sukses");
+            // ignore: empty_catches
+          } on NoAuthorizationException {}
+        },
+      );
+
+      test(
+        "should success",
+        () async {
+          final user = await userRemoteDataSource.login(
+            email: adminEmail,
+            password: adminPassword,
+          );
+          final token = user.token;
+          try {
+            await remoteDataSource.updateCategory(
+              token: token,
+              id: 14,
+              newName: "kelompok 1",
+            );
+            // ignore: empty_catches
+          } on NotFoundException {
+            expect("sukses", "gagal");
+          }
+        },
+      );
+    },
+  );
 }
