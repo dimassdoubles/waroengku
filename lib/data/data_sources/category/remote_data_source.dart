@@ -6,6 +6,7 @@ import '../../../share/errors/exceptions.dart';
 
 abstract class CategoryRemoteDataSource {
   Future<List<Category>> getCategories(String token);
+  Future<void> createCategory({required String token, required String name});
 }
 
 class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
@@ -29,6 +30,21 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
       return listCategory;
     } on DioError {
       throw (GetCategoriesException("Gagal mendapatkan list category"));
+    }
+  }
+
+  @override
+  Future<void> createCategory(
+      {required String token, required String name}) async {
+    const String endPoint = "$baseUrl/api/admin/category";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final body = {"name": name};
+      await dio.post(endPoint, data: body);
+    } on DioError {
+      throw NoAuthorizationException(
+          "Hanya admin yang boleh membuat category baru");
     }
   }
 }
