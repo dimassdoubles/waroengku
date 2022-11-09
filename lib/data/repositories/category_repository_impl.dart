@@ -20,4 +20,17 @@ class CategoryRepositoryImpl extends CategoryRepository {
       return Left(GetCategoriesFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> createCategory({
+    required String token,
+    required String name,
+  }) async {
+    try {
+      await remoteDataSource.createCategory(token: token, name: name);
+      return const Right(null);
+    } on NoAuthorizationException catch (e) {
+      return Left(NoAuthorizationFailure(e.message));
+    }
+  }
 }

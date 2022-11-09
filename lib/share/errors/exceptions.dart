@@ -17,3 +17,8 @@ class GetCategoriesException implements Exception {
   String message;
   GetCategoriesException(this.message);
 }
+
+class NoAuthorizationException implements Exception {
+  String message;
+  NoAuthorizationException(this.message);
+}
