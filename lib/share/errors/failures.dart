@@ -41,3 +41,11 @@ class NoAuthorizationFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class NotFoundFailure extends Failure {
+  String message;
+  NotFoundFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

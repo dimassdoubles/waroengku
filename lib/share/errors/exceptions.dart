@@ -22,3 +22,8 @@ class NoAuthorizationException implements Exception {
   String message;
   NoAuthorizationException(this.message);
 }
+
+class NotFoundException implements Exception {
+  String message;
+  NotFoundException(this.message);
+}
