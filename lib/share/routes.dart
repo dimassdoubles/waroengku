@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:waroengku/presentation/pages/playground_page.dart';
 import '../presentation/pages/login_page.dart';
 import '../presentation/pages/splash_page.dart';
 
 const String splashPage = "splash-page";
 const String loginPage = "login-page";
+const String playgroundPage = "playground-page";
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
+    case playgroundPage:
+      return MaterialPageRoute(
+        builder: (context) => const PlaygroundPage(),
+      );
     case loginPage:
       return MaterialPageRoute(
         builder: (context) => const LoginPage(),
