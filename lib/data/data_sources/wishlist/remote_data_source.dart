@@ -6,6 +6,7 @@ import '../../../share/const/base_url.dart';
 
 abstract class WishlistRemoteDataSource {
   Future<List<Wishlist>> getWishlist(String token);
+  Future<void> createWishlist(String token, int productId);
 }
 
 class WishlistRemoteDataSourceImpl extends WishlistRemoteDataSource {
@@ -29,8 +30,22 @@ class WishlistRemoteDataSourceImpl extends WishlistRemoteDataSource {
 
       return listWishlist;
     } catch (e) {
-      print(e);
       throw GetWishlistException("Gagal mengambil wishlist");
+    }
+  }
+
+  @override
+  Future<void> createWishlist(String token, int productId) async {
+    const String endPoint = "$baseUrl/api/wishlist";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final body = {
+        "product_id": productId,
+      };
+      await dio.post(endPoint, data: body);
+    } catch (e) {
+      throw CreateWishlistException("Gagal menambah wishlist");
     }
   }
 }

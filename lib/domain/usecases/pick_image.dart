@@ -21,4 +21,5 @@ Future<File?> pickImage(BuildContext? context, {bool camera = false}) async {
       },
     );
   }
+  return null;
 }
