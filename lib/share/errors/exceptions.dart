@@ -42,3 +42,8 @@ class DeleteWishlistException implements Exception {
   String message;
   DeleteWishlistException(this.message);
 }
+
+class GetCartException implements Exception {
+  String message;
+  GetCartException(this.message);
+}

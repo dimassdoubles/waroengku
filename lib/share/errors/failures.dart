@@ -73,3 +73,11 @@ class DeleteWishlistFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class GetCartFailure extends Failure {
+  String message;
+  GetCartFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
