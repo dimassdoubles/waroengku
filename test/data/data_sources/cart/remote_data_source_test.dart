@@ -37,4 +37,21 @@ void main() {
       );
     },
   );
+
+  group(
+    "deleteCart",
+    () {
+      test(
+        "should return void",
+        () async {
+          try {
+            await remoteDataSource.deleteCart(validUserToken, 1);
+            expect("success", "success");
+          } on DeleteCartException {
+            expect("fail", "fail");
+          }
+        },
+      );
+    },
+  );
 }

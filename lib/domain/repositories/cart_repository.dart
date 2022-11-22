@@ -9,4 +9,5 @@ abstract class CartRepository {
     int productId,
     int quantity,
   );
+  Future<Either<Failure, void>> deleteCart(String token, int id);
 }

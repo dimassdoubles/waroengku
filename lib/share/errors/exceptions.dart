@@ -52,3 +52,8 @@ class CreateCartException implements Exception {
   String message;
   CreateCartException(this.message);
 }
+
+class DeleteCartException implements Exception {
+  String message;
+  DeleteCartException(this.message);
+}
