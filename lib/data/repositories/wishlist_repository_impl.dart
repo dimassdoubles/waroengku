@@ -31,4 +31,14 @@ class WishlistRepositoryImpl extends WishlistRepository {
       return Left(CreateWishlistFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteWishlist(String token, int id) async {
+    try {
+      await remoteDataSource.deleteWishlist(token, id);
+      return const Right(null);
+    } on DeleteWishlistException catch (e) {
+      return Left(DeleteWishlistFailure(e.message));
+    }
+  }
 }

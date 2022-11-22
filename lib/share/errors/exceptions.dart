@@ -37,3 +37,8 @@ class CreateWishlistException implements Exception {
   String message;
   CreateWishlistException(this.message);
 }
+
+class DeleteWishlistException implements Exception {
+  String message;
+  DeleteWishlistException(this.message);
+}

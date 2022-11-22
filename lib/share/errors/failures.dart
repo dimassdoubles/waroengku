@@ -61,8 +61,15 @@ class GetWishlistFailure extends Failure {
 class CreateWishlistFailure extends Failure {
   String message;
   CreateWishlistFailure(this.message);
-  
+
   @override
   List<Object?> get props => [message];
+}
 
+class DeleteWishlistFailure extends Failure {
+  String message;
+  DeleteWishlistFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }
