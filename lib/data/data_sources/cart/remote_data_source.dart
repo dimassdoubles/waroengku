@@ -5,6 +5,7 @@ import 'package:waroengku/share/errors/exceptions.dart';
 
 abstract class CartRemoteDataSource {
   Future<List<Cart>> getCart(String token);
+  Future<void> createCart(String token, int productId, int quantity);
 }
 
 class CartRemoteDataSourceImpl extends CartRemoteDataSource {
@@ -30,6 +31,23 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
       return listCart;
     } catch (e) {
       throw GetCartException("Gagal Mendapatkan List Cart");
+    }
+  }
+
+  @override
+  Future<void> createCart(
+    String token,
+    int productId,
+    int quantity,
+  ) async {
+    const String endPoint = "$baseUrl/api/keranjang";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final body = {"product_id": productId, "qty": quantity};
+      await dio.post(endPoint, data: body);
+    } catch (e) {
+      throw CreateCartException("Gagal Menambahkan Barang Ke Keranjang");
     }
   }
 }

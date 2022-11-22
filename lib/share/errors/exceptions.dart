@@ -47,3 +47,8 @@ class GetCartException implements Exception {
   String message;
   GetCartException(this.message);
 }
+
+class CreateCartException implements Exception {
+  String message;
+  CreateCartException(this.message);
+}

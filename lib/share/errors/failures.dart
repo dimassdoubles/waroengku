@@ -81,3 +81,11 @@ class GetCartFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class CreateCartFailure extends Failure {
+  String message;
+  CreateCartFailure(this.message);
+  
+  @override
+  List<Object?> get props => [message];
+}
