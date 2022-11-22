@@ -20,4 +20,18 @@ class CartRepositoryImpl extends CartRepository {
       return Left(GetCartFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> createCart(
+    String token,
+    int productId,
+    int quantity,
+  ) async {
+    try {
+      await remoteDataSource.createCart(token, productId, quantity);
+      return const Right(null);
+    } on CreateCartException catch (e) {
+      return Left(CreateCartFailure(e.message));
+    }
+  }
 }
