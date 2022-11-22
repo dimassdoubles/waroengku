@@ -49,3 +49,11 @@ class NotFoundFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class GetWishlistFailure extends Failure {
+  String message;
+  GetWishlistFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
