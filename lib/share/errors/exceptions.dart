@@ -27,3 +27,8 @@ class NotFoundException implements Exception {
   String message;
   NotFoundException(this.message);
 }
+
+class GetWishlistException implements Exception {
+  String message;
+  GetWishlistException(this.message);
+}
