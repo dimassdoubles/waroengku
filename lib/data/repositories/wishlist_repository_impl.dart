@@ -20,4 +20,15 @@ class WishlistRepositoryImpl extends WishlistRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> createWishlist(
+      String token, int productId) async {
+    try {
+      await remoteDataSource.createWishlist(token, productId);
+      return const Right(null);
+    } on CreateWishlistException catch (e) {
+      return Left(CreateWishlistFailure(e.message));
+    }
+  }
 }

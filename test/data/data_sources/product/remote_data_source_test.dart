@@ -103,6 +103,7 @@ void main() async {
             expect("sukses", "gagal");
           } on NotFoundException {
             expect("NotFoundException", "NoAuthorizationException");
+            // ignore: empty_catches
           } on NoAuthorizationException {}
         },
       );
