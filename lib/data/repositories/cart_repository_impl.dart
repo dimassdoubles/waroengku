@@ -34,4 +34,14 @@ class CartRepositoryImpl extends CartRepository {
       return Left(CreateCartFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteCart(String token, int id) async {
+    try {
+      await remoteDataSource.deleteCart(token, id);
+      return const Right(null);
+    } on DeleteCartException catch (e) {
+      return Left(DeleteCartFailure(e.message));
+    }
+  }
 }
