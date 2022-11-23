@@ -30,7 +30,7 @@ void main() {
           try {
             await remoteDataSource.createCart(validUserToken, 1, 4);
             expect("success", "success");
-          } on CreateCartException catch (e) {
+          } on CreateCartException {
             expect("fail", "fail");
           }
         },
