@@ -67,3 +67,8 @@ class CreateTransactionException implements Exception {
   String message;
   CreateTransactionException(this.message);
 }
+
+class CreateReviewException implements Exception {
+  String message;
+  CreateReviewException(this.message);
+}

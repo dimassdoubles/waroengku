@@ -72,6 +72,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
             review: datas[i]["review"],
             image: datas[i]["image"],
             authorName: datas[i]["user"]["name"],
+            userId: datas[i]["user_id"],
           ),
         );
       }
