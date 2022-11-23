@@ -113,3 +113,11 @@ class CreateTransactionFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class CreateReviewFailure extends Failure {
+  String message;
+  CreateReviewFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

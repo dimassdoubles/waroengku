@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:waroengku/data/data_sources/review/remote_data_source.dart';
 import 'package:waroengku/domain/usecases/pick_image.dart';
 
 class PlaygroundPage extends StatefulWidget {
@@ -67,11 +68,14 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             ),
             (image != null)
                 ? ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await createReview(image!);
+                      print("selesai");
+                    },
                     child: const SizedBox(
                       width: double.infinity,
                       child: Center(
-                        child: Text('Upload Barang'),
+                        child: Text('Create Review'),
                       ),
                     ),
                   )
@@ -105,4 +109,15 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       ),
     );
   }
+}
+
+createReview(File image) async {
+  ReviewRemoteDataSource remoteDataSource = ReviewRemoteDataSourceImpl();
+  await remoteDataSource.createReview(
+    "938|Dt6ZztWCumzBH6GsatiNxD8V9AurUS6uzJmdiiRa",
+    3,
+    4,
+    "Kelompok 1 coba review",
+    image,
+  );
 }
