@@ -62,3 +62,8 @@ class GetTransactionException implements Exception {
   String message;
   GetTransactionException(this.message);
 }
+
+class CreateTransactionException implements Exception {
+  String message;
+  CreateTransactionException(this.message);
+}

@@ -21,4 +21,15 @@ class TransactionRepositoryImpl extends TransactionRepository {
       return Left(GetTransactionFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> createTransaction(
+      String token, String address) async {
+    try {
+      await remoteDataSource.createTransaction(token, address);
+      return const Right(null);
+    } on CreateTransactionException catch (e) {
+      return Left(CreateTransactionFailure(e.message));
+    }
+  }
 }

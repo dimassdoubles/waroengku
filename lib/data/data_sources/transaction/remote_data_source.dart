@@ -6,6 +6,7 @@ import 'package:waroengku/share/errors/exceptions.dart';
 
 abstract class TransactionRemoteDataSource {
   Future<List<Transaction>> getTransaction(String token);
+  Future<void> createTransaction(String token, String address);
 }
 
 class TransactionRemoteDataSourceImpl extends TransactionRemoteDataSource {
@@ -42,6 +43,19 @@ class TransactionRemoteDataSourceImpl extends TransactionRemoteDataSource {
       return listTransaction;
     } catch (e) {
       throw GetTransactionException("Gagal Mengambil List Transaction");
+    }
+  }
+
+  @override
+  Future<void> createTransaction(String token, String address) async {
+    const String endPoint = "$baseUrl/api/transaksi";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final body = {"alamat": address};
+      await dio.post(endPoint, data: body);
+    } catch (e) {
+      throw CreateTransactionException("Gagal Checkout");
     }
   }
 }
