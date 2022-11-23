@@ -57,3 +57,8 @@ class DeleteCartException implements Exception {
   String message;
   DeleteCartException(this.message);
 }
+
+class GetTransactionException implements Exception {
+  String message;
+  GetTransactionException(this.message);
+}

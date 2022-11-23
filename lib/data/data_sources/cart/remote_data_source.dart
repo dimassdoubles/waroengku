@@ -54,7 +54,7 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
 
   @override
   Future<void> deleteCart(String token, int id) async {
-    final String endPoint = "$baseUrl/api/keranjang/id";
+    final String endPoint = "$baseUrl/api/keranjang/$id";
     try {
       Dio dio = Dio();
       dio.options.headers["Authorization"] = "Bearer $token";
