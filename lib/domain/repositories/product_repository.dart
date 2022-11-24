@@ -12,4 +12,5 @@ abstract class ProductRepository {
     required String token,
     required int productId,
   });
+  Future<Either<Failure, void>> deleteProduct(String token, int id);
 }

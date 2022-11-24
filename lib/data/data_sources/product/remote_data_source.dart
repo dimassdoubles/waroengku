@@ -13,6 +13,7 @@ abstract class ProductRemoteDataSource {
     required String token,
     required int productId,
   });
+  Future<void> deleteProduct(String token, int id);
 }
 
 class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
@@ -83,6 +84,18 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       } else {
         throw NoAuthorizationException("Token tidak valid");
       }
+    }
+  }
+
+  @override
+  Future<void> deleteProduct(String token, int id) async {
+    final String endPoint = "$baseUrl/api/admin/barang/$id";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      await dio.delete(endPoint);
+    } catch (e) {
+      throw DeleteProductException("Gagal Menghapus Product");
     }
   }
 }
