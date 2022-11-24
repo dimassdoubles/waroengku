@@ -72,3 +72,8 @@ class CreateReviewException implements Exception {
   String message;
   CreateReviewException(this.message);
 }
+
+class DeleteReviewException implements Exception {
+  String message;
+  DeleteReviewException(this.message);
+}

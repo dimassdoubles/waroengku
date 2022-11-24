@@ -11,4 +11,5 @@ abstract class ReviewRepository {
     String review,
     File image,
   );
+  Future<Either<Failure, void>> deleteReview(String token, int id);
 }

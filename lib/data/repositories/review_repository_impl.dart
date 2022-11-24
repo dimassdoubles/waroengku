@@ -32,4 +32,14 @@ class ReviewRepositoryImpl extends ReviewRepository {
       return Left(CreateReviewFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteReview(String token, int id) async {
+    try {
+      await remoteDataSource.deleteReview(token, id);
+      return const Right(null);
+    } on DeleteReviewException catch (e) {
+      return Left(DeleteReviewFailure(e.message));
+    }
+  }
 }
