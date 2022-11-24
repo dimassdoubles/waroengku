@@ -82,4 +82,24 @@ class ProductRepositoryImpl extends ProductRepository {
       return Left(CreateProductFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateProduct(
+    String token,
+    int id,
+    String name,
+    int categoryId,
+    File image,
+    int stock,
+    String description,
+    int price,
+  ) async {
+    try {
+      await remoteDataSource.updateProduct(
+          token, id, name, categoryId, image, stock, description, price);
+      return const Right(null);
+    } on UpdateProductException catch (e) {
+      return Left(UpdateProductFailure(e.message));
+    }
+  }
 }

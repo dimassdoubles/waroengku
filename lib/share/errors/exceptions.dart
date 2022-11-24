@@ -89,3 +89,8 @@ class CreateProductException implements Exception {
   String message;
   CreateProductException(this.message);
 }
+
+class UpdateProductException implements Exception {
+  String message;
+  UpdateProductException(this.message);
+}

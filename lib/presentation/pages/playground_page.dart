@@ -100,11 +100,15 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                 : const SizedBox(),
             (image != null)
                 ? ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      print("Mencoba update barang");
+                      await updateBarang(image!);
+                      print("Selesai update barang");
+                    },
                     child: const SizedBox(
                       width: double.infinity,
                       child: Center(
-                        child: Text('Create Review'),
+                        child: Text('Update Barang'),
                       ),
                     ),
                   )
@@ -114,6 +118,20 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       ),
     );
   }
+}
+
+updateBarang(File image) async {
+  ProductRemoteDataSource remoteDataSource = ProductRemoteDataSourceImpl();
+  await remoteDataSource.updateProduct(
+    "1129|qulDXTrYqKialTizB7wz7xC2FhM2XnD3rdXk9ZlD",
+    62,
+    "kelompok 1 test product update",
+    1,
+    image,
+    1001,
+    "kelompok 1 coba buat product update",
+    10000,
+  );
 }
 
 createBarang(File image) async {
