@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:waroengku/data/data_sources/product/remote_data_source.dart';
 import 'package:waroengku/domain/entity/product.dart';
 import 'package:dartz/dartz.dart';
@@ -53,6 +55,31 @@ class ProductRepositoryImpl extends ProductRepository {
       return const Right(null);
     } on DeleteProductException catch (e) {
       return Left(DeleteProductFailure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> createProduct(
+      String token,
+      String name,
+      int categoryId,
+      File image,
+      int stock,
+      String description,
+      int price) async {
+    try {
+      await remoteDataSource.createProduct(
+        token,
+        name,
+        categoryId,
+        image,
+        stock,
+        description,
+        price,
+      );
+      return const Right(null);
+    } on CreateProductException catch (e) {
+      return Left(CreateProductFailure(e.message));
     }
   }
 }
