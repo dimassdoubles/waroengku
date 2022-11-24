@@ -84,3 +84,8 @@ class DeleteProductException implements Exception {
   String message;
   DeleteProductException(this.message);
 }
+
+class CreateProductException implements Exception {
+  String message;
+  CreateProductException(this.message);
+}
