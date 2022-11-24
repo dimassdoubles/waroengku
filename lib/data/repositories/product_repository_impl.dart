@@ -45,4 +45,14 @@ class ProductRepositoryImpl extends ProductRepository {
       return Left(NotFoundFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteProduct(String token, int id) async {
+    try {
+      await remoteDataSource.deleteProduct(token, id);
+      return const Right(null);
+    } on DeleteProductException catch (e) {
+      return Left(DeleteProductFailure(e.message));
+    }
+  }
 }

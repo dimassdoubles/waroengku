@@ -122,4 +122,24 @@ void main() async {
       );
     },
   );
+
+  group(
+    "deleteProduct",
+    () {
+      test(
+        "should return void",
+        () async {
+          try {
+            await remoteDataSource.deleteProduct(
+              "1129|qulDXTrYqKialTizB7wz7xC2FhM2XnD3rdXk9ZlD",
+              61,
+            );
+            expect("success", "success");
+          } on DeleteProductException {
+            expect("fail", "success");
+          }
+        },
+      );
+    },
+  );
 }

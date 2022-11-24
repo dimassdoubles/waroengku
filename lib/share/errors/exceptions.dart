@@ -1,3 +1,5 @@
+import 'package:waroengku/domain/usecases/delete_product.dart';
+
 class RegisterException implements Exception {
   String message;
   RegisterException(this.message);
@@ -76,4 +78,9 @@ class CreateReviewException implements Exception {
 class DeleteReviewException implements Exception {
   String message;
   DeleteReviewException(this.message);
+}
+
+class DeleteProductException implements Exception {
+  String message;
+  DeleteProductException(this.message);
 }
