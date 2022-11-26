@@ -3,21 +3,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:waroengku/data/data_sources/user/remote_data_source.dart';
 import 'package:waroengku/data/repositories/user_repository_impl.dart';
+import 'package:waroengku/domain/entity/user.dart';
 import 'package:waroengku/share/errors/exceptions.dart';
 import 'package:waroengku/share/errors/failures.dart';
 
 class MockRemoteUserDataSource extends Mock implements UserRemoteDataSource {}
 
 void main() {
-  late MockRemoteUserDataSource remoteDataSource;
-  late UserRepositoryImpl repository;
-
-  setUp(
-    () {
-      remoteDataSource = MockRemoteUserDataSource();
-      repository = UserRepositoryImpl(remoteDataSource: remoteDataSource);
-    },
-  );
+  late MockRemoteUserDataSource remoteDataSource = MockRemoteUserDataSource();
+  late UserRepositoryImpl repository =
+      UserRepositoryImpl(remoteDataSource: remoteDataSource);
 
   group(
     "register",
@@ -85,6 +80,95 @@ void main() {
               phone: phone,
             ),
           );
+          verifyNoMoreInteractions(remoteDataSource);
+        },
+      );
+    },
+  );
+
+  group(
+    "login",
+    () {
+      const User expectedUser = User(
+          id: 12, name: "name", email: "email", phone: "phone", role: "role");
+      const String email = "email";
+      const String password = "password";
+
+      test(
+        "should return user when success",
+        () async {
+          when(
+            () => remoteDataSource.login(email: email, password: password),
+          ).thenAnswer(
+            (invocation) async => expectedUser,
+          );
+
+          final result = await repository.login(
+            email: email,
+            password: password,
+          );
+
+          expect(result, const Right(expectedUser));
+          verify(
+            () => remoteDataSource.login(email: email, password: password),
+          );
+          verifyNoMoreInteractions(remoteDataSource);
+        },
+      );
+      test(
+        "should return LoginFailure when error",
+        () async {
+          when(
+            () => remoteDataSource.login(email: email, password: password),
+          ).thenThrow(
+            LoginException("Gagal Login"),
+          );
+          final result = await repository.login(
+            email: email,
+            password: password,
+          );
+
+          expect(result, Left(LoginFailure("Gagal Login")));
+          verify(
+            () => remoteDataSource.login(email: email, password: password),
+          );
+          verifyNoMoreInteractions(remoteDataSource);
+        },
+      );
+    },
+  );
+
+  group(
+    "logout",
+    () {
+      test(
+        "should return void when success",
+        () async {
+          when(
+            () => remoteDataSource.logout("token"),
+          ).thenAnswer(
+            (invocation) => Future.value(null),
+          );
+
+          final result = await repository.logout("token");
+          expect(result, const Right(null));
+          verify(() => remoteDataSource.logout("token"));
+          verifyNoMoreInteractions(remoteDataSource);
+        },
+      );
+
+      test(
+        "shoudl return LogoutFailure when error",
+        () async {
+          when(
+            () => remoteDataSource.logout("token"),
+          ).thenThrow(
+            LogoutException("Gagal Logout"),
+          );
+
+          final result = await repository.logout("token");
+          expect(result, Left(LogoutFailure("Gagal Logout")));
+          verify(() => remoteDataSource.logout("token"));
           verifyNoMoreInteractions(remoteDataSource);
         },
       );

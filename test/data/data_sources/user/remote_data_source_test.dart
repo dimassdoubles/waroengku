@@ -1,15 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:waroengku/data/data_sources/user/remote_data_source.dart';
+import 'package:waroengku/domain/entity/user.dart';
 import 'package:waroengku/share/errors/exceptions.dart';
 
 void main() {
-  late UserRemoteDataSourceImpl remoteDataSource;
-
-  setUp(
-    () {
-      remoteDataSource = UserRemoteDataSourceImpl();
-    },
-  );
+  UserRemoteDataSourceImpl remoteDataSource = UserRemoteDataSourceImpl();
 
   group(
     "register",
@@ -101,6 +96,83 @@ void main() {
               "The handphone must be a number.",
             );
           }
+        },
+      );
+    },
+  );
+
+  group(
+    "login",
+    () {
+      const String email = "kelompok1@gmail.com";
+      const String password = "kelompok1";
+
+      const User user = User(
+          id: 51,
+          name: "kelompok1",
+          email: email,
+          phone: "123456789",
+          role: "user");
+      test(
+        "should success",
+        () async {
+          final result = await remoteDataSource.login(
+            email: email,
+            password: password,
+          );
+          // because token is random, we can't check token property
+          expect(
+            [result.id, result.name, result.email, result.phone, result.role],
+            [user.id, user.name, user.email, user.phone, user.role],
+          );
+        },
+      );
+
+      test(
+        "should throw LoginException when wrong email or password",
+        () async {
+          try {
+            await remoteDataSource.login(
+              email: email,
+              password: "wrong",
+            );
+          } on LoginException catch (e) {
+            expect(e.message, "Email atau password yang dimasukkan salah");
+          }
+        },
+      );
+    },
+  );
+
+  group(
+    "logout",
+    () {
+      const String email = "kelompok1@gmail.com";
+      const String password = "kelompok1";
+
+      test(
+        "should success",
+        () async {
+          final user = await remoteDataSource.login(
+            email: email,
+            password: password,
+          );
+          try {
+            await remoteDataSource.logout(user.token);
+          } catch (e) {
+            expect("Logout Success", "Logout Fail");
+          }
+        },
+      );
+
+      test(
+        "should fail",
+        () async {
+          try {
+            await remoteDataSource.logout("wrong");
+            expect("Logout Fail", "Logout Success");
+            // ignore: empty_catches
+          } catch (e) {}
         },
       );
     },

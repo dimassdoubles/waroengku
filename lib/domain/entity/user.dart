@@ -1,22 +1,22 @@
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
-  final String _id, _name, _email, _phone, _role, _token;
+  final String _name, _email, _phone, _role, _token;
+  final int _id;
 
   const User({
-    required String id,
+    required int id,
     required String name,
     required String email,
     required String phone,
     required String role,
-    required String token,
+    String token = "",
   })  : _id = id,
         _name = name,
         _email = email,
         _phone = phone,
         _role = role,
         _token = token;
-
 
   String get token {
     return _token;
@@ -26,7 +26,7 @@ class User extends Equatable {
     return _name;
   }
 
-  String get id {
+  int get id {
     return _id;
   }
 

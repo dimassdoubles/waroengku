@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/user.dart';
+import '../../share/errors/failures.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, void>> register({
@@ -8,4 +9,11 @@ abstract class UserRepository {
     required String phone,
     required String password,
   });
+
+  Future<Either<Failure, User>> login({
+    required String email,
+    required String password,
+  });
+
+  Future<Either<Failure, void>> logout(String token);
 }
