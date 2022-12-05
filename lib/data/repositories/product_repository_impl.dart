@@ -105,7 +105,24 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<Product>>> getProduct({required String token, required List<Category> categories}) {
-    throw UnimplementedError();
+  Future<Either<Failure, List<Product>>> getProduct({
+    required String token,
+    required List<Category> categories,
+  }) async {
+    try {
+      final result = await remoteDataSource.getProduct(token);
+      final listCategoryId = categories.map((e) => e.id).toList();
+      List<Product> listProduct = [
+        ...result
+            .where((element) => listCategoryId.contains(element.categoryId))
+      ];
+      // untuk mengecek apakah berhasil mengambil produk
+      // for (int i = 0; i < listProduct.length; i++) {
+      //   print(listProduct[i].name);
+      // }
+      return Right(listProduct);
+    } catch (e) {
+      return Left(LazyFailure());
+    }
   }
 }

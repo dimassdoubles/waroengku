@@ -149,7 +149,13 @@ class CreateProductFailure extends Failure {
 class UpdateProductFailure extends Failure {
   String message;
   UpdateProductFailure(this.message);
-  
+
   @override
   List<Object?> get props => [message];
+}
+
+// dikejar deadline, utamakan fitur selesai
+class LazyFailure extends Failure {
+  @override
+  List<Object?> get props => [];
 }

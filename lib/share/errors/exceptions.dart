@@ -94,3 +94,5 @@ class UpdateProductException implements Exception {
   String message;
   UpdateProductException(this.message);
 }
+
+class LazyException implements Exception {}

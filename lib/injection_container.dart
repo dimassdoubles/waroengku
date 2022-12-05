@@ -11,6 +11,7 @@ import 'package:waroengku/domain/usecases/create_category.dart';
 import 'package:waroengku/domain/usecases/create_product.dart';
 import 'package:waroengku/domain/usecases/delete_product.dart';
 import 'package:waroengku/domain/usecases/get_categories.dart';
+import 'package:waroengku/domain/usecases/get_product.dart';
 import 'package:waroengku/domain/usecases/get_product_by_category.dart';
 import 'package:waroengku/domain/usecases/get_user_logged_in.dart';
 import 'package:waroengku/domain/usecases/is_sign_in.dart';
@@ -102,13 +103,19 @@ Future<void> setUp() async {
     DeleteProduct(getIt()),
   );
 
+  getIt.registerSingleton<GetProduct>(
+    GetProduct(getIt()),
+  );
+
   // bloc
   getIt.registerSingleton<ProductBloc>(
     ProductBloc(
-        getProductByCategory: getIt(),
-        createProduct: getIt(),
-        updateProduct: getIt(),
-        deleteProduct: getIt()),
+      getProductByCategory: getIt(),
+      createProduct: getIt(),
+      updateProduct: getIt(),
+      deleteProduct: getIt(),
+      getProduct: getIt(),
+    ),
   );
 
   getIt.registerSingleton(

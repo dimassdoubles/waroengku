@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:waroengku/domain/entity/product.dart';
 
 import '../../../../share/styles/colors.dart';
 
 class KatalogItem extends StatelessWidget {
-  const KatalogItem({
+  Product product;
+  KatalogItem({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -38,10 +41,11 @@ class KatalogItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Image.asset(
-                        "assets/images/pulen-removebg-preview 1.png",
+                      Image.network(
+                        product.image,
                         width: 50,
                         height: 50,
+                        fit: BoxFit.cover,
                       ),
                       const SizedBox(
                         width: 8,
@@ -49,28 +53,29 @@ class KatalogItem extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           SizedBox(
                             child: Text(
-                              "Beras Pandan Wangi",
-                              style: TextStyle(
+                              product.name,
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           Text(
-                            "Rp. 27. 500",
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic),
+                            "Rp. ${product.price}",
+                            style: const TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              // fontStyle: FontStyle.italic,
+                            ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                         ],
