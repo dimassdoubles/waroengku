@@ -5,7 +5,14 @@ import 'package:waroengku/domain/entity/product.dart';
 import 'package:waroengku/domain/entity/review.dart';
 import 'package:waroengku/share/errors/failures.dart';
 
+import '../entity/category.dart';
+
 abstract class ProductRepository {
+  Future<Either<Failure, List<Product>>> getProduct({
+    required String token,
+    required List<Category> categories,
+  });
+
   Future<Either<Failure, List<Product>>> getProductByCategory({
     required String token,
     required int categoryId,

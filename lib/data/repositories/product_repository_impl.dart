@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:waroengku/data/data_sources/product/remote_data_source.dart';
+import 'package:waroengku/domain/entity/category.dart';
 import 'package:waroengku/domain/entity/product.dart';
 import 'package:dartz/dartz.dart';
 import 'package:waroengku/domain/entity/review.dart';
@@ -101,5 +102,10 @@ class ProductRepositoryImpl extends ProductRepository {
     } on UpdateProductException catch (e) {
       return Left(UpdateProductFailure(e.message));
     }
+  }
+
+  @override
+  Future<Either<Failure, List<Product>>> getProduct({required String token, required List<Category> categories}) {
+    throw UnimplementedError();
   }
 }

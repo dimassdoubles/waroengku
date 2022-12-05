@@ -76,7 +76,7 @@ class _EditKategoriPageState extends State<EditKategoriPage> {
                     (route) => false,
                     arguments: 1,
                   );
-                } else if (catState is CategoryOnLoad) {
+                } else if (catState is CategoryOnload) {
                   showDialog(
                     context: context,
                     barrierDismissible: false,

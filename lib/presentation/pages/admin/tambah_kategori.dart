@@ -63,7 +63,7 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
             return BlocListener(
               bloc: catBloc,
               listener: (context, catState) {
-                if (catState is CategoryOnLoad) {
+                if (catState is CategoryOnload) {
                   showDialog(
                     context: context,
                     barrierDismissible: false,

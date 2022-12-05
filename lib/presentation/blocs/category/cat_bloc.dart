@@ -17,7 +17,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }) : super(CategoryUnload()) {
     on<CategoryGet>(
       (event, emit) async {
-        emit(CategoryOnLoad());
+        emit(CategoryOnload());
         final result = await getCategories(event.token);
         result.fold(
           (l) => emit(CategoryUnload()),
@@ -27,7 +27,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     );
     on<CategoryCreate>(
       (event, emit) async {
-        emit(CategoryOnLoad());
+        emit(CategoryOnload());
         await createCategory(
           name: event.name,
           token: event.token,
@@ -41,7 +41,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     );
     on<CategoryEdit>(
       (event, emit) async {
-        emit(CategoryOnLoad());
+        emit(CategoryOnload());
         await updateCategory(
           newName: event.newName,
           id: event.id,

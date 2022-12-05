@@ -8,7 +8,7 @@ class CategoryUnload extends CategoryState {
   List<Object?> get props => [];
 }
 
-class CategoryOnLoad extends CategoryState {
+class CategoryOnload extends CategoryState {
   @override
   List<Object?> get props => [];
 }
