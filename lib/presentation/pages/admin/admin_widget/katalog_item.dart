@@ -26,11 +26,11 @@ class KatalogItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: Colors.grey,
+                  color: kPrimaryColor.withOpacity(0.3),
                   blurRadius: 3,
-                  offset: Offset(0.7, 1),
+                  offset: const Offset(0.7, 1),
                 )
               ],
             ),
@@ -67,7 +67,7 @@ class KatalogItem extends StatelessWidget {
                             height: 8,
                           ),
                           Text(
-                            "Rp. ${product.price}",
+                            "Rp ${product.price}",
                             style: const TextStyle(
                               color: kPrimaryColor,
                               fontSize: 14,

@@ -68,7 +68,10 @@ class _LoginPageState extends State<LoginPage>
           child: Column(
             children: [
               Container(
-                child: Lottie.asset("assets/lotties/108403-customer-need.json"),
+                child: Lottie.asset(
+                  "assets/lotties/108403-customer-need.json",
+                  height: MediaQuery.of(context).size.height / 3,
+                ),
               ),
               TabBar(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

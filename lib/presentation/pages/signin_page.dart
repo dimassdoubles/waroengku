@@ -34,11 +34,14 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 35),
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 16,
+            ),
             SizedBox(
               child: TextFormField(
                 controller: emailController,

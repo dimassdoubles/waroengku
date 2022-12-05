@@ -15,7 +15,11 @@ class CategoryCreate extends CategoryEvent {
 
 class CategoryDelete extends CategoryEvent {
   String token;
-  CategoryDelete(this.token);
+  int id;
+  CategoryDelete({
+    required this.token,
+    required this.id,
+  });
 }
 
 class CategoryEdit extends CategoryEvent {

@@ -46,11 +46,12 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 16,),
               SizedBox(
                 child: TextFormField(
                   controller: nameController,
@@ -143,6 +144,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 32,
               ),
             ],
           ),

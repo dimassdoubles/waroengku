@@ -5,6 +5,7 @@ import '../../../share/const/base_url.dart';
 import '../../../share/errors/exceptions.dart';
 
 abstract class CategoryRemoteDataSource {
+  Future<void> deleteCategory(String token, int id);
   Future<List<Category>> getCategories(String token);
   Future<void> createCategory({required String token, required String name});
   Future<void> updateCategory({
@@ -72,6 +73,18 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
         throw NoAuthorizationException(
             "Hanya admin yang bisa mengedit kategori");
       }
+    }
+  }
+
+  @override
+  Future<void> deleteCategory(String token, int id) async {
+    final String endPoint = "$baseUrl/api/admin/category/$id";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      await dio.delete(endPoint);
+    } catch (e) {
+      throw LazyException();
     }
   }
 }

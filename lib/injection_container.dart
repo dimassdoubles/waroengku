@@ -9,6 +9,7 @@ import 'package:waroengku/domain/repositories/category_repository.dart';
 import 'package:waroengku/domain/repositories/user_repository.dart';
 import 'package:waroengku/domain/usecases/create_category.dart';
 import 'package:waroengku/domain/usecases/create_product.dart';
+import 'package:waroengku/domain/usecases/delete_category.dart';
 import 'package:waroengku/domain/usecases/delete_product.dart';
 import 'package:waroengku/domain/usecases/get_categories.dart';
 import 'package:waroengku/domain/usecases/get_product.dart';
@@ -107,6 +108,10 @@ Future<void> setUp() async {
     GetProduct(getIt()),
   );
 
+  getIt.registerSingleton<DeleteCategory>(
+    DeleteCategory(getIt()),
+  );
+
   // bloc
   getIt.registerSingleton<ProductBloc>(
     ProductBloc(
@@ -133,6 +138,7 @@ Future<void> setUp() async {
       getCategories: getIt(),
       createCategory: getIt(),
       updateCategory: getIt(),
+      deleteCategory: getIt(),
     ),
   );
 }

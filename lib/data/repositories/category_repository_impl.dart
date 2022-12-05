@@ -65,4 +65,14 @@ class CategoryRepositoryImpl extends CategoryRepository {
       return Left(NoAuthorizationFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteCategory(String token, int id) async {
+    try {
+      await remoteDataSource.deleteCategory(token, id);
+      return const Right(null);
+    } catch (e) {
+      return Left(LazyFailure());
+    }
+  }
 }

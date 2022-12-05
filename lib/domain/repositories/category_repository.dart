@@ -3,6 +3,7 @@ import '../entity/category.dart';
 import '../../share/errors/failures.dart';
 
 abstract class CategoryRepository {
+  Future<Either<Failure, void>> deleteCategory(String token, int id);
   Future<Either<Failure, List<Category>>> getCategories(String token);
 
   Future<Either<Failure, void>> createCategory({
