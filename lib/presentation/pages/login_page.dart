@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:lottie/lottie.dart';
+import 'package:waroengku/injection_container.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
 import 'package:waroengku/presentation/pages/signin_page.dart';
 import 'package:waroengku/presentation/pages/signup_page.dart';
-import 'package:waroengku/presentation/pages/splash_page.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
@@ -19,19 +22,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  late StreamSubscription<bool> keyboardSubscription;
-  late KeyboardVisibilityController keyboardVisibilityController;
+  late AuthBloc authBloc;
 
   @override
   void initState() {
     super.initState();
-    keyboardVisibilityController = KeyboardVisibilityController();
     tabController = TabController(length: 2, vsync: this);
+    authBloc = getIt<AuthBloc>();
   }
 
   @override
   void dispose() {
-    keyboardSubscription.cancel();
     tabController.dispose();
     super.dispose();
   }
@@ -40,36 +41,60 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            (keyboardVisibilityController.isVisible)
-                ? const SizedBox()
-                : Container(
-                    child: Lottie.asset(
-                        "assets/lotties/108403-customer-need.json"),
-                  ),
-            TabBar(
-              controller: tabController,
-              labelColor: kPrimaryColor,
-              tabs: const [
-                Tab(
-                  text: ("Sign In"),
-                ),
-                Tab(
-                  text: ("Sign Up"),
-                ),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
+        child: BlocListener(
+          bloc: authBloc,
+          listener: (context, state) {
+            if (state is AuthLoad) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (_) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(
+                          color: kPrimaryColor,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else if (state is Authenticated) {
+              Navigator.pushReplacementNamed(context, homeAdmin);
+            }
+          },
+          child: Column(
+            children: [
+              Container(
+                child: Lottie.asset("assets/lotties/108403-customer-need.json"),
+              ),
+              TabBar(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 controller: tabController,
-                children: const [
-                  SignInPage(),
-                  SignUpPage(),
+                labelColor: kPrimaryColor,
+                indicatorColor: kPrimaryColor,
+                tabs: const [
+                  Tab(
+                    text: ("Sign In"),
+                  ),
+                  Tab(
+                    text: ("Sign Up"),
+                  ),
                 ],
               ),
-            ),
-          ],
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: const [
+                    SignInPage(),
+                    SignUpPage(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

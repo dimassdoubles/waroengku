@@ -1,91 +1,186 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/presentation/pages/admin/katalog.dart';
-import 'package:waroengku/presentation/pages/signup_page.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
+import 'package:waroengku/presentation/pages/admin/kategori.dart';
+import 'package:waroengku/share/routes.dart';
 
-class HomeAdminPage extends StatelessWidget {
+import '../../../injection_container.dart';
+import '../../../share/styles/colors.dart';
+import '../../blocs/auth/auth_event.dart';
+import '../signup_page.dart';
+import 'katalog.dart';
+
+class HomeAdminPage extends StatefulWidget {
   const HomeAdminPage({super.key});
 
   @override
+  State<HomeAdminPage> createState() => _HomeAdminPageState();
+}
+
+class _HomeAdminPageState extends State<HomeAdminPage>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          child: Column(
-            children: [
-              SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Hello",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: const [
-                        SizedBox(
-                          child: Text(
-                            "Anda Login sebagai Admin",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (tabController.index == 0) {
+            print("pergi ke tambah katalog");
+            Navigator.pushNamed(context, tambahKatalogPage);
+          } else if (tabController.index == 1) {
+            print("pergi ke tambah kategori");
+            Navigator.pushNamed(context, tambahKategoriPage);
+          }
+        },
+        backgroundColor: kPrimaryColor,
+        elevation: 0,
+        child: const Icon(Icons.add),
+      ),
+      body: BlocConsumer(
+        listener: (context, state) {
+          if (state is AuthLoad) {
+            print("Hallo hallo bandung");
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(
+                        color: kPrimaryColor,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          } else if (state is UnAuthenticated) {
+            Navigator.pushNamed(context, loginPage);
+          }
+        },
+        bloc: getIt<AuthBloc>(),
+        builder: (context, state) {
+          if (state is Authenticated) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Hello ${state.user.name},",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                const Text(
+                                  "Anda Login sebagai Admin",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            SizedBox(
+                              child: InkWell(
+                                onTap: () {
+                                  getIt<AuthBloc>().add(
+                                    AuthLogout(state.user.token),
+                                  );
+                                },
+                                child: const Icon(Icons.logout,
+                                    color: kPrimaryColor),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
+                          // width: size.width * 0.8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: kPrimaryColor.withAlpha(20)),
+                          child: const TextField(
+                            cursorColor: kPrimaryColor,
+                            decoration: InputDecoration(
+                                hintText: "Search ",
+                                icon: Icon(Icons.search_rounded,
+                                    color: kPrimaryColor),
+                                border: InputBorder.none),
                           ),
                         ),
-                        Spacer(),
-                        SizedBox(
-                          child:
-                              Icon(Icons.notifications, color: kPrimaryColor),
-                        )
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
-                      // width: size.width * 0.8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: kPrimaryColor.withAlpha(20)),
-                      child: const TextField(
-                        cursorColor: kPrimaryColor,
-                        decoration: InputDecoration(
-                            hintText: "Search ",
-                            icon: Icon(Icons.search_rounded,
-                                color: kPrimaryColor),
-                            border: InputBorder.none),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const TabBar(
-                labelColor: kPrimaryColor,
-                tabs: [
-                  Tab(
-                    text: ("Katalog"),
                   ),
-                  Tab(
-                    text: ("Kategori"),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TabBar(
+                    controller: tabController,
+                    labelColor: kPrimaryColor,
+                    indicatorColor: kPrimaryColor,
+                    tabs: const [
+                      Tab(
+                        text: ("Katalog"),
+                      ),
+                      Tab(
+                        text: ("Kategori"),
+                      )
+                    ],
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: tabController,
+                      children: [
+                        KatalogPage(),
+                        KategoriPage(),
+                      ],
+                    ),
                   )
                 ],
               ),
-              Expanded(
-                child: TabBarView(
-                  children: [KatalogPage(), SignUpPage()],
-                ),
-              )
-            ],
-          ),
-        ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
       ),
     );
   }

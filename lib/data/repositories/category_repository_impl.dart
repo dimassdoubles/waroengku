@@ -1,3 +1,6 @@
+import 'package:waroengku/domain/usecases/string_extension.dart';
+import 'package:waroengku/share/const/category_previx.dart';
+
 import '../../domain/entity/category.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/repositories/category_repository.dart';
@@ -15,7 +18,13 @@ class CategoryRepositoryImpl extends CategoryRepository {
   Future<Either<Failure, List<Category>>> getCategories(String token) async {
     try {
       final result = await remoteDataSource.getCategories(token);
-      return Right(result);
+      return Right(
+        result
+            .where((element) => element.name.contains(categoryPrevix))
+            .toList()
+            .reversed
+            .toList(),
+      );
     } on GetCategoriesException catch (e) {
       return Left(GetCategoriesFailure(e.message));
     }
@@ -27,7 +36,10 @@ class CategoryRepositoryImpl extends CategoryRepository {
     required String name,
   }) async {
     try {
-      await remoteDataSource.createCategory(token: token, name: name);
+      await remoteDataSource.createCategory(
+        token: token,
+        name: "$categoryPrevix${name.toTitleCase()}",
+      );
       return const Right(null);
     } on NoAuthorizationException catch (e) {
       return Left(NoAuthorizationFailure(e.message));
@@ -44,7 +56,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
       final result = await remoteDataSource.updateCategory(
         token: token,
         id: id,
-        newName: newName,
+        newName: "$categoryPrevix$newName",
       );
       return Right(result);
     } on NotFoundException catch (e) {

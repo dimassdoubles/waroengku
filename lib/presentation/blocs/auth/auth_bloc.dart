@@ -36,10 +36,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<AuthLogin>(
       (event, emit) async {
+        emit(AuthLoad());
+        print("mencoba login");
         final result = await login(
           email: event.email,
           password: event.password,
         );
+        print("berhasil login");
         result.fold(
           (l) => emit(UnAuthenticated()),
           (r) => emit(Authenticated(r)),
@@ -48,6 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<AuthLogout>(
       (event, emit) async {
+        emit(AuthLoad());
         final result = await logout(event.token);
         result.fold(
           (l) => emit(UnAuthenticated()),
@@ -57,18 +61,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<AuthRegister>(
       (event, emit) async {
-        final result = await register(
+        emit(AuthLoad());
+        await register(
           email: event.email,
           name: event.name,
           password: event.password,
           phone: event.phone,
         );
+
+        final result = await login(
+          email: event.email,
+          password: event.password,
+        );
         result.fold(
           (l) => emit(UnAuthenticated()),
-          (r) {
-            print("Berhasil register");
-            emit(UnAuthenticated());
-          },
+          (r) => emit(Authenticated(r)),
         );
       },
     );

@@ -44,113 +44,107 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
-      bloc: authBloc,
-      listener: (context, state) => (state is Authenticated)
-          ? Navigator.pushNamed(context, homeAdmin)
-          : null,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 35),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  child: TextFormField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: "Nama Lengkap"),
-                    cursorColor: kPrimaryColor,
-                  ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                child: TextFormField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: "Nama Lengkap"),
+                  cursorColor: kPrimaryColor,
                 ),
-                const SizedBox(
-                  height: 16,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                child: TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                      border: UnderlineInputBorder(), labelText: "Email"),
+                  cursorColor: kPrimaryColor,
                 ),
-                SizedBox(
-                  child: TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(), labelText: "Email"),
-                    cursorColor: kPrimaryColor,
-                  ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                child: TextFormField(
+                  controller: phoneController,
+                  decoration: const InputDecoration(
+                      border: UnderlineInputBorder(), labelText: "Handphone"),
+                  cursorColor: kPrimaryColor,
                 ),
-                const SizedBox(
-                  height: 16,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                child: TextFormField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                      fillColor: kPrimaryColor,
+                      border: UnderlineInputBorder(),
+                      labelText: "Password",
+                      suffixIcon: Icon(Icons.remove_red_eye)),
+                  cursorColor: kPrimaryColor,
+                  obscureText: true,
                 ),
-                SizedBox(
-                  child: TextFormField(
-                    controller: phoneController,
-                    decoration: const InputDecoration(
-                        border: UnderlineInputBorder(), labelText: "Handphone"),
-                    cursorColor: kPrimaryColor,
-                  ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                      fillColor: kPrimaryColor,
+                      border: UnderlineInputBorder(),
+                      labelText: "Confirm Password",
+                      suffixIcon: Icon(Icons.remove_red_eye)),
+                  cursorColor: kPrimaryColor,
+                  obscureText: true,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  child: TextFormField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                        fillColor: kPrimaryColor,
-                        border: UnderlineInputBorder(),
-                        labelText: "Password",
-                        suffixIcon: Icon(Icons.remove_red_eye)),
-                    cursorColor: kPrimaryColor,
-                    obscureText: true,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                        fillColor: kPrimaryColor,
-                        border: UnderlineInputBorder(),
-                        labelText: "Confirm Password",
-                        suffixIcon: Icon(Icons.remove_red_eye)),
-                    cursorColor: kPrimaryColor,
-                    obscureText: true,
-                  ),
-                ),
-                const SizedBox(
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              InkWell(
+                onTap: () {
+                  String name = nameController.text;
+                  String email = emailController.text;
+                  String phone = phoneController.text;
+                  String password = passwordController.text;
+                  print("$name $email $phone $password");
+                  authBloc.add(
+                    AuthRegister(
+                      name: name,
+                      email: email,
+                      phone: phone,
+                      password: password,
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
                   height: 50,
-                ),
-                InkWell(
-                  onTap: () {
-                    String name = nameController.text;
-                    String email = emailController.text;
-                    String phone = phoneController.text;
-                    String password = passwordController.text;
-                    print("$name $email $phone $password");
-                    authBloc.add(
-                      AuthRegister(
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        password: password,
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kPrimaryColor,
-                    ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Daftar",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: kPrimaryColor,
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Daftar",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
