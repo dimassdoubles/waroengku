@@ -8,11 +8,11 @@ import 'package:waroengku/share/routes.dart';
 import '../../../injection_container.dart';
 import '../../../share/styles/colors.dart';
 import '../../blocs/auth/auth_event.dart';
-import '../signup_page.dart';
 import 'katalog.dart';
 
 class HomeAdminPage extends StatefulWidget {
-  const HomeAdminPage({super.key});
+  int initialIndex;
+  HomeAdminPage({super.key, this.initialIndex = 0});
 
   @override
   State<HomeAdminPage> createState() => _HomeAdminPageState();
@@ -24,7 +24,12 @@ class _HomeAdminPageState extends State<HomeAdminPage>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    print("Hallo disini tab controller");
+    tabController = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: widget.initialIndex,
+    );
   }
 
   @override

@@ -34,8 +34,9 @@ Route<dynamic> controller(RouteSettings settings) {
         builder: (context) => const TambahKatalog(),
       );
     case homeAdmin:
+      final initialIndex = settings.arguments as int;
       return MaterialPageRoute(
-        builder: (context) => const HomeAdminPage(),
+        builder: (context) => HomeAdminPage(initialIndex: initialIndex,),
       );
     case detailPage:
       return MaterialPageRoute(

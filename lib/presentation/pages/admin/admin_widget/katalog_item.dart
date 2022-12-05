@@ -79,28 +79,32 @@ class KatalogItem extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        SizedBox(
-                          child: Text(
-                            "Edit  ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8, bottom: 8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: const [
+                          SizedBox(
+                            child: Text(
+                              "Edit  ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          child: Text("  |  "),
-                        ),
-                        SizedBox(
-                          child: Text(
-                            "Delete",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.red),
+                          SizedBox(
+                            child: Text("  |  "),
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            child: Text(
+                              "Delete",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],

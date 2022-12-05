@@ -27,7 +27,6 @@ class _KategoriPageState extends State<KategoriPage> {
         bloc: authBloc,
         builder: (context, authState) {
           if (authState is Authenticated) {
-            catBloc.add(CategoryGet(authState.user.token));
             return BlocBuilder(
               bloc: catBloc,
               builder: (context, catState) {
@@ -55,6 +54,7 @@ class _KategoriPageState extends State<KategoriPage> {
                     ],
                   );
                 }
+                catBloc.add(CategoryGet(authState.user.token));
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

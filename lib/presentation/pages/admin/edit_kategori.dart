@@ -43,6 +43,7 @@ class _EditKategoriPageState extends State<EditKategoriPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("masuk sini lagi");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffBBCFE4),
@@ -68,7 +69,14 @@ class _EditKategoriPageState extends State<EditKategoriPage> {
             return BlocListener(
               bloc: catBloc,
               listener: (context, catState) {
-                if (catState is CategoryOnLoad) {
+                if (catState is CategoryLoaded) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    homeAdmin,
+                    (route) => false,
+                    arguments: 1,
+                  );
+                } else if (catState is CategoryOnLoad) {
                   showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -85,9 +93,6 @@ class _EditKategoriPageState extends State<EditKategoriPage> {
                       );
                     },
                   );
-                } else if (catState is CategoryLoaded) {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, homeAdmin, (route) => false);
                 }
               },
               child: SingleChildScrollView(

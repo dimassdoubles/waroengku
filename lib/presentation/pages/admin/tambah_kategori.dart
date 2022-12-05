@@ -85,7 +85,11 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
                   // Navigator.pop(context);
                   // Navigator.pop(context);
                   Navigator.pushNamedAndRemoveUntil(
-                      context, homeAdmin, (route) => false);
+                    context,
+                    homeAdmin,
+                    (route) => false,
+                    arguments: 1,
+                  );
                 }
               },
               child: SingleChildScrollView(

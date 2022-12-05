@@ -52,7 +52,9 @@ class SuccessPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeAdminPage()));
+                              builder: (context) => HomeAdminPage(
+                                    initialIndex: 0,
+                                  )));
                     },
                     child: Container(
                       padding:

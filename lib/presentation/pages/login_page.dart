@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage>
                 },
               );
             } else if (state is Authenticated) {
-              Navigator.pushReplacementNamed(context, homeAdmin);
+              Navigator.pushReplacementNamed(context, homeAdmin, arguments: 0);
             }
           },
           child: Column(
