@@ -49,7 +49,6 @@ class KategoriItem extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Text("|"),
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(
@@ -63,6 +62,7 @@ class KategoriItem extends StatelessWidget {
                             color: Colors.green,
                           ),
                         ),
+                        const Text("|"),
                         const Icon(
                           Icons.delete,
                           color: Colors.red,
