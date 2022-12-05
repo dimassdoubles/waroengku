@@ -70,5 +70,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+    on<ProductEdit>(
+      (event, emit) async {
+        emit(ProductOnload());
+        await updateProduct(
+          categoryId: event.categoryId,
+          description: event.description,
+          id: event.id,
+          image: event.image,
+          name: event.name,
+          price: event.price,
+          stock: event.stock,
+          token: event.token,
+        );
+
+        final result = await getProduct(
+          token: event.token,
+          categories: event.categories,
+        );
+
+        result.fold(
+          (l) => emit(ProductUnload()),
+          (r) => emit(ProductLoaded(r)),
+        );
+      },
+    );
   }
 }

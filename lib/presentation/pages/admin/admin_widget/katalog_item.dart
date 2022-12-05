@@ -8,6 +8,7 @@ import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
 import 'package:waroengku/presentation/blocs/category/cat_state.dart';
 import 'package:waroengku/presentation/blocs/product/product_bloc.dart';
 import 'package:waroengku/presentation/blocs/product/product_event.dart';
+import 'package:waroengku/share/routes.dart';
 
 import '../../../../share/styles/colors.dart';
 
@@ -107,12 +108,21 @@ class KatalogItem extends StatelessWidget {
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const SizedBox(
-                                        child: Text(
-                                          "Edit  ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            editKatalogPage,
+                                            arguments: product,
+                                          );
+                                        },
+                                        child: const SizedBox(
+                                          child: Text(
+                                            "Edit  ",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(

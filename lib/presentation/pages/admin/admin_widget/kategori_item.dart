@@ -54,7 +54,12 @@ class KategoriItem extends StatelessWidget {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 16),
-                            child: Text(category.name.removeCategoryPrevix()),
+                            child: Text(
+                              category.name.removeCategoryPrevix(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                         Expanded(

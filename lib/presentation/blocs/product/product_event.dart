@@ -32,6 +32,7 @@ class ProductEdit extends ProductEvent {
   String token, name, description;
   int id, categoryId, stock, price;
   File image;
+  List<Category> categories;
   ProductEdit({
     required this.token,
     required this.name,
@@ -41,6 +42,7 @@ class ProductEdit extends ProductEvent {
     required this.stock,
     required this.price,
     required this.image,
+    required this.categories,
   });
 }
 

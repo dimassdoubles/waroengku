@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waroengku/domain/entity/category.dart';
+import 'package:waroengku/domain/entity/product.dart';
+import 'package:waroengku/presentation/pages/admin/edit_katalog.dart';
 import 'package:waroengku/presentation/pages/admin/edit_kategori.dart';
 import 'package:waroengku/presentation/pages/admin/home_admin.dart';
 import 'package:waroengku/presentation/pages/admin/tambah_katalog.dart';
@@ -17,9 +19,15 @@ const String homeAdmin = "home-admin";
 const String tambahKategoriPage = "tambah-kategori";
 const String tambahKatalogPage = "tambah-katalog";
 const String editKategoriPage = "edit-kategori";
+const String editKatalogPage = "edit-katalog";
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
+    case editKatalogPage:
+      final args = settings.arguments as Product;
+      return MaterialPageRoute(
+        builder: (context) => EditKatalogPage(product: args),
+      );
     case editKategoriPage:
       final args = settings.arguments as Category;
       return MaterialPageRoute(
@@ -36,7 +44,9 @@ Route<dynamic> controller(RouteSettings settings) {
     case homeAdmin:
       final initialIndex = settings.arguments as int;
       return MaterialPageRoute(
-        builder: (context) => HomeAdminPage(initialIndex: initialIndex,),
+        builder: (context) => HomeAdminPage(
+          initialIndex: initialIndex,
+        ),
       );
     case detailPage:
       return MaterialPageRoute(
