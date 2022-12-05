@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:waroengku/domain/usecases/pick_image.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
 class TambahKatalog extends StatefulWidget {
@@ -10,7 +13,7 @@ class TambahKatalog extends StatefulWidget {
 }
 
 class _TambahKatalogState extends State<TambahKatalog> {
-  XFile? image;
+  File? image;
 
   //show popup dialog
   void chooseImageSource() {
@@ -26,8 +29,14 @@ class _TambahKatalogState extends State<TambahKatalog> {
               children: [
                 ElevatedButton(
                   //if user click this button, user can upload image from gallery
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pop(context);
+                    final imagePicked = await pickImage(context);
+                    if (imagePicked != null) {
+                      setState(() {
+                        image = imagePicked;
+                      });
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kPrimaryColor,
@@ -44,16 +53,21 @@ class _TambahKatalogState extends State<TambahKatalog> {
                 ),
                 ElevatedButton(
                   //if user click this button. user can upload image from camera
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pop(context);
-                    // getImage(ImageSource.camera);
+                    final imagePicked = await pickImage(context, camera: true);
+                    if (imagePicked != null) {
+                      setState(() {
+                        image = imagePicked;
+                      });
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kPrimaryColor,
                   ),
                   child: Row(
                     children: const [
-                      Icon(Icons.camera),
+                      Icon(Icons.camera_alt_rounded),
                       SizedBox(
                         width: 4,
                       ),
@@ -94,27 +108,32 @@ class _TambahKatalogState extends State<TambahKatalog> {
                 width: double.infinity,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: Container(
-                    color: Colors.grey[300],
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.camera_alt_rounded,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Tambah Gambar Produk",
-                          style: TextStyle(
-                            color: Colors.grey,
+                  child: (image == null)
+                      ? Container(
+                          color: Colors.grey[300],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "Tambah Gambar Produk",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
                           ),
+                        )
+                      : Image.file(
+                          image!,
+                          fit: BoxFit.cover,
                         ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
             ),
