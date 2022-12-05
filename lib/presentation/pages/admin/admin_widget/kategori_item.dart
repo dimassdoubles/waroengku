@@ -41,7 +41,7 @@ class KategoriItem extends StatelessWidget {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: kPrimaryColor.withOpacity(0.3),
+                        color: Colors.grey.withOpacity(0.3),
                         blurRadius: 3,
                         offset: const Offset(0.7, 1),
                       )
