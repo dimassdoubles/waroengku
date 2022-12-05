@@ -121,3 +121,27 @@ class CreateReviewFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class DeleteReviewFailure extends Failure {
+  String message;
+  DeleteReviewFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class DeleteProductFailure extends Failure {
+  String message;
+  DeleteProductFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class CreateProductFailure extends Failure {
+  String message;
+  CreateProductFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

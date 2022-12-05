@@ -6,7 +6,13 @@ import 'package:waroengku/share/errors/exceptions.dart';
 
 abstract class ReviewRemoteDataSource {
   Future<void> createReview(
-      String token, int productId, int star, String review, File image);
+    String token,
+    int productId,
+    int star,
+    String review,
+    File image,
+  );
+  Future<void> deleteReview(String token, int id);
 }
 
 class ReviewRemoteDataSourceImpl extends ReviewRemoteDataSource {
@@ -33,6 +39,18 @@ class ReviewRemoteDataSourceImpl extends ReviewRemoteDataSource {
       await dio.post(endPoint, data: formData);
     } catch (e) {
       throw CreateReviewException("Gagal Membuat review");
+    }
+  }
+
+  @override
+  Future<void> deleteReview(String token, int id) async {
+    final String endPoint = "$baseUrl/api/review/$id";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      await dio.delete(endPoint);
+    } catch (e) {
+      throw DeleteReviewException("Gagal Menghapus Review");
     }
   }
 }

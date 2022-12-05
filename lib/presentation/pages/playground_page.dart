@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:waroengku/data/data_sources/product/remote_data_source.dart';
 import 'package:waroengku/data/data_sources/review/remote_data_source.dart';
 import 'package:waroengku/domain/usecases/pick_image.dart';
 
@@ -83,7 +84,11 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             (image != null)
                 ? Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        print("Mencoba buat barang");
+                        await createBarang(image!);
+                        print("Selesai buat barang");
+                      },
                       child: const SizedBox(
                         width: double.infinity,
                         child: Center(
@@ -109,6 +114,19 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       ),
     );
   }
+}
+
+createBarang(File image) async {
+  ProductRemoteDataSource remoteDataSource = ProductRemoteDataSourceImpl();
+  await remoteDataSource.createProduct(
+    "1129|qulDXTrYqKialTizB7wz7xC2FhM2XnD3rdXk9ZlD",
+    "kelompok 1 test product",
+    1,
+    image,
+    1001,
+    "kelompok 1 coba buat product",
+    10000,
+  );
 }
 
 createReview(File image) async {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:waroengku/domain/entity/product.dart';
 import 'package:waroengku/domain/entity/review.dart';
@@ -13,6 +15,16 @@ abstract class ProductRemoteDataSource {
     required String token,
     required int productId,
   });
+  Future<void> deleteProduct(String token, int id);
+  Future<void> createProduct(
+    String token,
+    String name,
+    int categoryId,
+    File image,
+    int stock,
+    String description,
+    int price,
+  );
 }
 
 class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
@@ -83,6 +95,48 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       } else {
         throw NoAuthorizationException("Token tidak valid");
       }
+    }
+  }
+
+  @override
+  Future<void> deleteProduct(String token, int id) async {
+    final String endPoint = "$baseUrl/api/admin/barang/$id";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      await dio.delete(endPoint);
+    } catch (e) {
+      throw DeleteProductException("Gagal Menghapus Product");
+    }
+  }
+
+  @override
+  Future<void> createProduct(
+    String token,
+    String name,
+    int categoryId,
+    File image,
+    int stock,
+    String description,
+    int price,
+  ) async {
+    const String endPoint = "$baseUrl/api/admin/barang";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final formData = FormData.fromMap(
+        {
+          "name": name,
+          "category_id": categoryId,
+          "image": await MultipartFile.fromFile(image.path),
+          "stock": stock,
+          "deskripsi": description,
+          "harga": price,
+        },
+      );
+      await dio.post(endPoint, data: formData);
+    } catch (e) {
+      throw CreateProductException("Gagal Membuat Product");
     }
   }
 }
