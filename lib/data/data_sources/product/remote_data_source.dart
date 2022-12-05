@@ -25,6 +25,16 @@ abstract class ProductRemoteDataSource {
     String description,
     int price,
   );
+  Future<void> updateProduct(
+    String token,
+    int id,
+    String name,
+    int categoryId,
+    File image,
+    int stock,
+    String description,
+    int price,
+  );
 }
 
 class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
@@ -137,6 +147,37 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       await dio.post(endPoint, data: formData);
     } catch (e) {
       throw CreateProductException("Gagal Membuat Product");
+    }
+  }
+
+  @override
+  Future<void> updateProduct(
+    String token,
+    int id,
+    String name,
+    int categoryId,
+    File image,
+    int stock,
+    String description,
+    int price,
+  ) async {
+    final String endPoint = "$baseUrl/api/admin/barang/$id";
+    try {
+      Dio dio = Dio();
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final formData = FormData.fromMap(
+        {
+          "name": name,
+          "category_id": categoryId,
+          "image": await MultipartFile.fromFile(image.path),
+          "stock": stock,
+          "deskripsi": description,
+          "harga": price,
+        },
+      );
+      await dio.post(endPoint, data: formData);
+    } catch (e) {
+      throw UpdateProductException("Gagal Update Barang");
     }
   }
 }

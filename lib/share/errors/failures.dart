@@ -145,3 +145,11 @@ class CreateProductFailure extends Failure {
   @override
   List<Object?> get props => [message];
 }
+
+class UpdateProductFailure extends Failure {
+  String message;
+  UpdateProductFailure(this.message);
+  
+  @override
+  List<Object?> get props => [message];
+}

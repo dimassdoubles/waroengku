@@ -24,4 +24,14 @@ abstract class ProductRepository {
     String description,
     int price,
   );
+  Future<Either<Failure, void>> updateProduct(
+    String token,
+    int id,
+    String name,
+    int categoryId,
+    File image,
+    int stock,
+    String description,
+    int price,
+  );
 }
