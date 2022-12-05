@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:waroengku/domain/usecases/create_product.dart';
 import 'package:waroengku/domain/usecases/delete_product.dart';
 import 'package:waroengku/domain/usecases/get_product.dart';
@@ -45,8 +46,24 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       (event, emit) async {
         emit(ProductOnload());
         print("mencoba mengambil produk");
-        final result = await getProduct(event.token, event.categories);
+        final result =
+            await getProduct(token: event.token, categories: event.categories);
         print("mengambil produk selesai");
+        result.fold(
+          (l) => emit(ProductUnload()),
+          (r) => emit(ProductLoaded(r)),
+        );
+      },
+    );
+
+    on<ProductDelete>(
+      (event, emit) async {
+        emit(ProductOnload());
+        await deleteProduct(token: event.token, id: event.id);
+        final result = await getProduct(
+          token: event.token,
+          categories: event.categories,
+        );
         result.fold(
           (l) => emit(ProductUnload()),
           (r) => emit(ProductLoaded(r)),

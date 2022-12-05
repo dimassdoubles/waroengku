@@ -43,3 +43,14 @@ class ProductEdit extends ProductEvent {
     required this.image,
   });
 }
+
+class ProductDelete extends ProductEvent {
+  String token;
+  int id;
+  List<Category> categories;
+  ProductDelete({
+    required this.token,
+    required this.id,
+    required this.categories,
+  });
+}
