@@ -55,7 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
             icon: Icons.favorite,
           ),
           FloatingNavbarItem(
-            icon: Icons.book,
+            icon: Icons.receipt_rounded,
           ),
           FloatingNavbarItem(
             icon: Icons.person,
