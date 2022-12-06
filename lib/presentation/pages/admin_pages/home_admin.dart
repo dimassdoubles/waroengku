@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/pages/admin/kategori.dart';
+import 'package:waroengku/presentation/pages/admin_pages/kategori.dart';
 import 'package:waroengku/share/routes.dart';
 
 import '../../../injection_container.dart';

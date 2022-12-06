@@ -4,8 +4,9 @@ import 'package:waroengku/data/repositories/category_repository_impl.dart';
 import 'package:waroengku/domain/repositories/category_repository.dart';
 import 'package:waroengku/domain/usecases/get_categories.dart';
 
-import '../../widgets/category_item.dart';
-import '../../widgets/product_item.dart';
+import '../../../widgets/user_widgets/category_item.dart';
+import '../../../widgets/user_widgets/product_item.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({

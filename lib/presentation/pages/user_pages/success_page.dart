@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:waroengku/presentation/pages/admin/home_admin.dart';
+import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
 
-import 'package:waroengku/presentation/pages/keranjangs_page.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
 class SuccessPage extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/presentation/pages/admin/admin_edit_katalog.dart';
-import 'package:waroengku/presentation/pages/success_page.dart';
+import 'package:waroengku/presentation/pages/admin_pages/admin_edit_katalog.dart';
+import 'package:waroengku/presentation/pages/user_pages/success_page.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
 class KeranjangsPage extends StatefulWidget {

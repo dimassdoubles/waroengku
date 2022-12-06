@@ -1,8 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:waroengku/injection_container.dart' as injection;
-import 'package:waroengku/presentation/pages/login_page.dart';
 import 'package:lottie/lottie.dart';
+
+import 'login_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

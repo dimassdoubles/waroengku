@@ -5,11 +5,10 @@ import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
 import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
 import 'package:waroengku/presentation/blocs/category/cat_event.dart';
 import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/presentation/widgets/category_item.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
 import '../../../injection_container.dart';
-import 'admin_widget/kategori_item.dart';
+import '../../widgets/admin_widgets/kategori_item.dart';
 
 class KategoriPage extends StatefulWidget {
   @override

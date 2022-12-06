@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/presentation/pages/success_page.dart';
-import 'package:waroengku/presentation/pages/admin/tambah_katalog.dart';
+import 'package:waroengku/presentation/pages/admin_pages/tambah_katalog.dart';
 import 'package:waroengku/share/styles/colors.dart';
+
+import '../user_pages/success_page.dart';
 
 class EditKatalog extends StatefulWidget {
   const EditKatalog({super.key});

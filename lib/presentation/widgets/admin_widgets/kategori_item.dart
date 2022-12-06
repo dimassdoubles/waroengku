@@ -9,7 +9,7 @@ import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
 import 'package:waroengku/presentation/blocs/category/cat_event.dart';
 import 'package:waroengku/share/routes.dart';
 
-import '../../../../share/styles/colors.dart';
+import '../../../share/styles/colors.dart';
 
 class KategoriItem extends StatelessWidget {
   Category category;

@@ -7,8 +7,8 @@ import 'package:lottie/lottie.dart';
 import 'package:waroengku/injection_container.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/pages/signin_page.dart';
-import 'package:waroengku/presentation/pages/signup_page.dart';
+import 'package:waroengku/presentation/pages/user_pages/signin_page.dart';
+import 'package:waroengku/presentation/pages/user_pages/signup_page.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 

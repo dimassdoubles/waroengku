@@ -10,7 +10,7 @@ import 'package:waroengku/presentation/blocs/product/product_bloc.dart';
 import 'package:waroengku/presentation/blocs/product/product_event.dart';
 import 'package:waroengku/share/routes.dart';
 
-import '../../../../share/styles/colors.dart';
+import '../../../share/styles/colors.dart';
 
 class KatalogItem extends StatelessWidget {
   Product product;

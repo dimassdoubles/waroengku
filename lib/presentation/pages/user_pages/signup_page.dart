@@ -6,7 +6,7 @@ import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
-import '../../injection_container.dart';
+import '../../../injection_container.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

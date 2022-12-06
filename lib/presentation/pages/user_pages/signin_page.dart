@@ -3,7 +3,8 @@ import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_event.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
-import '../../injection_container.dart';
+import '../../../injection_container.dart';
+
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

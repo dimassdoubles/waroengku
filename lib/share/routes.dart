@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:waroengku/domain/entity/category.dart';
 import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/presentation/pages/admin/edit_katalog.dart';
-import 'package:waroengku/presentation/pages/admin/edit_kategori.dart';
-import 'package:waroengku/presentation/pages/admin/home_admin.dart';
-import 'package:waroengku/presentation/pages/admin/tambah_katalog.dart';
-import 'package:waroengku/presentation/pages/admin/tambah_kategori.dart';
-import 'package:waroengku/presentation/pages/detail_page.dart';
-import 'package:waroengku/presentation/pages/login_page.dart';
-import 'package:waroengku/presentation/pages/splash_page.dart';
-import 'package:waroengku/presentation/pages/home_page.dart';
+import 'package:waroengku/presentation/pages/admin_pages/edit_katalog.dart';
+import 'package:waroengku/presentation/pages/admin_pages/edit_kategori.dart';
+import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
+import 'package:waroengku/presentation/pages/admin_pages/tambah_katalog.dart';
+import 'package:waroengku/presentation/pages/admin_pages/tambah_kategori.dart';
+
+import '../presentation/pages/user_pages/detail_page.dart';
+import '../presentation/pages/user_pages/home_page.dart';
+import '../presentation/pages/user_pages/login_page.dart';
+import '../presentation/pages/user_pages/splash_page.dart';
 
 const String splashPage = "splash-page";
 const String loginPage = "login-page";

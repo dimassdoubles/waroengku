@@ -10,10 +10,9 @@ import 'package:waroengku/presentation/blocs/category/cat_state.dart';
 import 'package:waroengku/presentation/blocs/product/product_bloc.dart';
 import 'package:waroengku/presentation/blocs/product/product_event.dart';
 import 'package:waroengku/presentation/blocs/product/product_state.dart';
-import 'package:waroengku/presentation/widgets/product_item.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
-import 'admin_widget/katalog_item.dart';
+import '../../widgets/admin_widget/katalog_item.dart';
 
 class KatalogPage extends StatefulWidget {
   @override
