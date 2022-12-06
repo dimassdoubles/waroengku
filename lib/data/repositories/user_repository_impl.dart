@@ -39,11 +39,15 @@ class UserRepositoryImpl extends UserRepository {
     required String password,
   }) async {
     try {
-      final result =
-          await remoteDataSource.login(email: email, password: password);
+      final result = await remoteDataSource.login(
+        email: email,
+        password: password,
+      );
       return Right(result);
     } on LoginException catch (e) {
       return Left(LoginFailure(e.message));
+    } catch (e) {
+      return Left(LazyFailure());
     }
   }
 

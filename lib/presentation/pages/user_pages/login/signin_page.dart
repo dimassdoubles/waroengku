@@ -3,8 +3,7 @@ import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_event.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
-import '../../../injection_container.dart';
-
+import '../../../../injection_container.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -72,10 +71,10 @@ class _SignInPageState extends State<SignInPage> {
             InkWell(
               onTap: () {
                 authBloc.add(
-                  // untuk mempermudah saja
+                  // untuk memudahkan login sebagai user
                   AuthLogin(
-                    email: "admin@admin.com",
-                    password: "admin123",
+                    email: "kelompok1@gmail.com",
+                    password: "kelompok1",
                   ),
                   // AuthLogin(
                   //   email: emailController.text,

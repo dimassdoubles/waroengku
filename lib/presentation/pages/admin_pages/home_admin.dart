@@ -24,7 +24,6 @@ class _HomeAdminPageState extends State<HomeAdminPage>
   @override
   void initState() {
     super.initState();
-    print("Hallo disini tab controller");
     tabController = TabController(
       length: 2,
       vsync: this,

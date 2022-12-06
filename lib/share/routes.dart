@@ -6,24 +6,36 @@ import 'package:waroengku/presentation/pages/admin_pages/edit_kategori.dart';
 import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
 import 'package:waroengku/presentation/pages/admin_pages/tambah_katalog.dart';
 import 'package:waroengku/presentation/pages/admin_pages/tambah_kategori.dart';
+import 'package:waroengku/presentation/pages/user_pages/keranjangs_page.dart';
+import 'package:waroengku/presentation/pages/user_pages/order_details.dart';
 
 import '../presentation/pages/user_pages/detail_page.dart';
-import '../presentation/pages/user_pages/home_page.dart';
-import '../presentation/pages/user_pages/login_page.dart';
+import '../presentation/pages/user_pages/dashboard/dashboard_page.dart';
+import '../presentation/pages/user_pages/login/login_page.dart';
 import '../presentation/pages/user_pages/splash_page.dart';
 
 const String splashPage = "splash-page";
 const String loginPage = "login-page";
-const String homePage = "home-page";
+const String dashboardPage = "dashboard-page";
 const String detailPage = "detail-page";
 const String homeAdmin = "home-admin";
 const String tambahKategoriPage = "tambah-kategori";
 const String tambahKatalogPage = "tambah-katalog";
 const String editKategoriPage = "edit-kategori";
 const String editKatalogPage = "edit-katalog";
+const String keranjangPage = "keranjang-page";
+const String orderDetailPage = "order-detail-page";
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
+    case orderDetailPage:
+      return MaterialPageRoute(
+        builder: (context) => OrderDetailsPage(),
+      );
+    case keranjangPage:
+      return MaterialPageRoute(
+        builder: (context) => const KeranjangsPage(),
+      );
     case editKatalogPage:
       final args = settings.arguments as Product;
       return MaterialPageRoute(
@@ -53,9 +65,9 @@ Route<dynamic> controller(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const DetailPage(),
       );
-    case homePage:
+    case dashboardPage:
       return MaterialPageRoute(
-        builder: (context) => const HomePage(),
+        builder: (context) => DashboardPage(),
       );
     case loginPage:
       return MaterialPageRoute(

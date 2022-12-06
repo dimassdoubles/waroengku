@@ -6,7 +6,7 @@ import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
-import '../../../injection_container.dart';
+import '../../../../injection_container.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -20,7 +20,6 @@ class _SignUpPageState extends State<SignUpPage> {
   late TextEditingController emailController;
   late TextEditingController phoneController;
   late TextEditingController passwordController;
-  // late TextEditingController nameController;
 
   final AuthBloc authBloc = getIt<AuthBloc>();
 
@@ -121,7 +120,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   String email = emailController.text;
                   String phone = phoneController.text;
                   String password = passwordController.text;
-                  print("$name $email $phone $password");
                   authBloc.add(
                     AuthRegister(
                       name: name,

@@ -14,7 +14,7 @@ class DetailPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
-          onPressed: () => Navigator.of(context).pop(homePage),
+          onPressed: () => Navigator.of(context).pop(dashboardPage),
         ),
         title: const Text(
           "Detail Product",

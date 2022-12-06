@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:waroengku/domain/entity/product.dart';
 import 'package:waroengku/share/routes.dart';
+import 'package:waroengku/share/styles/colors.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({
+  final Product product;
+  const ProductItem(
+    this.product, {
     Key? key,
   }) : super(key: key);
 
@@ -11,44 +15,67 @@ class ProductItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, detailPage),
       child: SizedBox(
-        width: 160,
-        height: 160,
-        child: Card(
-          color: Colors.white,
-          elevation: 7,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+        width: double.infinity,
+        child: AspectRatio(
+          aspectRatio: 2 / 3,
+          child: Card(
+            color: Colors.white,
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    "images/Beras.jpg",
-                    width: 64.0,
-                    height: 64.0,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            product.image,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          "${product.name}\n",
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        // const SizedBox(
+                        //   height: 4,
+                        // ),
+                        Text(
+                          "Rp ${product.price}",
+                          maxLines: 1,
+                          style: const TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Text(
-                    "Beras 5 Kg Cap \nHoki",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.0),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  const Text(
-                    "Rp. 45.000",
-                    style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w100,
-                        fontSize: 12.0),
-                  )
                 ],
               ),
             ),

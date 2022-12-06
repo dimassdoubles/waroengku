@@ -44,7 +44,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         print("berhasil login");
         result.fold(
-          (l) => emit(UnAuthenticated()),
+          (l) {
+            print("Login Gagal");
+            return emit(AuthFail());
+          },
           (r) => emit(Authenticated(r)),
         );
       },

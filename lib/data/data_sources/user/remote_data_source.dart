@@ -91,6 +91,8 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       return user;
     } on DioError catch (e) {
       throw LoginException(e.response!.data["info"]);
+    } catch (e) {
+      throw LazyException();
     }
   }
 

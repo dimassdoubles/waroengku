@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:waroengku/injection_container.dart' as injection;
 import 'package:lottie/lottie.dart';
 
-import 'login_page.dart';
+import 'login/login_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

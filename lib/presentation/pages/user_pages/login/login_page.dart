@@ -1,14 +1,11 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:lottie/lottie.dart';
 import 'package:waroengku/injection_container.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/pages/user_pages/signin_page.dart';
-import 'package:waroengku/presentation/pages/user_pages/signup_page.dart';
+import 'package:waroengku/presentation/pages/user_pages/login/signin_page.dart';
+import 'package:waroengku/presentation/pages/user_pages/login/signup_page.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
@@ -61,8 +58,18 @@ class _LoginPageState extends State<LoginPage>
                   );
                 },
               );
+            } else if (state is AuthFail) {
+              Navigator.pop(context);
             } else if (state is Authenticated) {
-              Navigator.pushReplacementNamed(context, homeAdmin, arguments: 0);
+              if (state.user.role == "admin") {
+                Navigator.pushReplacementNamed(
+                  context,
+                  homeAdmin,
+                  arguments: 0,
+                );
+              } else if (state.user.role == "user") {
+                Navigator.pushReplacementNamed(context, dashboardPage);
+              }
             }
           },
           child: Column(
