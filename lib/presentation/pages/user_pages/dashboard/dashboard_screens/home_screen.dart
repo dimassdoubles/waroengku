@@ -12,7 +12,6 @@ import 'package:waroengku/presentation/blocs/product/product_state.dart';
 import '../../../../../injection_container.dart';
 import '../../../../../share/routes.dart';
 import '../../../../../share/styles/colors.dart';
-import '../../../../widgets/user_widgets/categories_bar.dart';
 import '../../../../widgets/user_widgets/product_item.dart';
 import '../../../../widgets/user_widgets/search_bar.dart';
 
