@@ -1,22 +1,24 @@
 import 'package:equatable/equatable.dart';
+import 'package:waroengku/domain/entity/product.dart';
 
 class Wishlist extends Equatable {
-  final int _id, _productId, _userId;
+  final int _id, _userId;
+  final Product _product;
 
   const Wishlist({
     required int id,
-    required int productId,
+    required Product product,
     required int userId,
   })  : _id = id,
-        _productId = productId,
+        _product = product,
         _userId = userId;
 
   int get id {
     return _id;
   }
 
-  int get productId {
-    return _productId;
+  Product get product {
+    return _product;
   }
 
   int get userId {
@@ -24,5 +26,5 @@ class Wishlist extends Equatable {
   }
 
   @override
-  List<Object?> get props => [_id, _productId, _userId];
+  List<Object?> get props => [_id, _product, _userId];
 }

@@ -13,6 +13,7 @@ class WishlistRepositoryImpl extends WishlistRepository {
   Future<Either<Failure, List<Wishlist>>> getWishlist(String token) async {
     try {
       final result = await remoteDataSource.getWishlist(token);
+      print("berhasil get wishlist di repository");
       return Right(result);
     } on GetWishlistException catch (e) {
       return Left(

@@ -5,6 +5,7 @@ import 'package:waroengku/injection_container.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
 import 'package:waroengku/presentation/pages/user_pages/dashboard/dashboard_screens/account_screen.dart';
+import 'package:waroengku/presentation/pages/user_pages/dashboard/dashboard_screens/transaction_screen.dart';
 import 'package:waroengku/presentation/pages/user_pages/dashboard/dashboard_screens/wishlist_screen.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
@@ -29,7 +30,7 @@ class _DashboardPageState extends State<DashboardPage> {
       case 1:
         return WishlistScreen();
       case 2:
-        return HomeScreen();
+        return TransactionScreen();
       case 3:
         return AccountScreen();
       default:
