@@ -9,7 +9,7 @@ class CreateReview {
   ReviewRepository repository;
   CreateReview(this.repository);
 
-  Future<Either<Failure, void>> call(
+  Future<Either<Failure , void>> call(
       String token, int productId, int star, String review, File image) async {
     return await repository.createReview(token, productId, star, review, image);
   }

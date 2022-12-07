@@ -15,6 +15,7 @@ import 'package:waroengku/presentation/pages/user_pages/success_page.dart';
 import '../presentation/pages/user_pages/detail_page.dart';
 import '../presentation/pages/user_pages/dashboard/dashboard_page.dart';
 import '../presentation/pages/user_pages/login/login_page.dart';
+import '../presentation/pages/user_pages/reviews_page.dart';
 import '../presentation/pages/user_pages/splash_page.dart';
 
 const String splashPage = "splash-page";
@@ -30,9 +31,17 @@ const String keranjangPage = "keranjang-page";
 const String orderDetailPage = "order-detail-page";
 const String checkoutPage = "checkout-page";
 const String successPage = "success-page'";
+const String reviewPage = "review-page";
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
+    case reviewPage:
+      final args = settings.arguments as Transaction;
+      return MaterialPageRoute(
+        builder: (context) => ReviewsPage(
+          transaction: args,
+        ),
+      );
     case successPage:
       return MaterialPageRoute(
         builder: (context) => SuccessPage(),
