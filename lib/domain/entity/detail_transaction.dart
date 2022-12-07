@@ -1,24 +1,26 @@
 import 'package:equatable/equatable.dart';
+import 'package:waroengku/domain/entity/product.dart';
 
 class DetailTransaction extends Equatable {
-  final int _productId, _quantity;
+  final int _quantity;
+  final Product _product;
   const DetailTransaction({
-    required int productId,
+    required Product product,
     required int quantity,
-  })  : _productId = productId,
+  })  : _product = product,
         _quantity = quantity;
 
   int get quantity {
     return _quantity;
   }
 
-  int get productId {
-    return _productId;
+  Product get product {
+    return _product;
   }
 
   @override
   List<Object?> get props => [
-        _productId,
+        _product,
         _quantity,
       ];
 }

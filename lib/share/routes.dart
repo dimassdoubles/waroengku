@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waroengku/domain/entity/category.dart';
 import 'package:waroengku/domain/entity/product.dart';
+import 'package:waroengku/domain/entity/transaction.dart';
 import 'package:waroengku/presentation/pages/admin_pages/edit_katalog.dart';
 import 'package:waroengku/presentation/pages/admin_pages/edit_kategori.dart';
 import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
@@ -41,8 +42,9 @@ Route<dynamic> controller(RouteSettings settings) {
         builder: (context) => CheckoutPage(),
       );
     case orderDetailPage:
+      final args = settings.arguments as Transaction;
       return MaterialPageRoute(
-        builder: (context) => OrderDetailsPage(),
+        builder: (context) => OrderDetailsPage(transaction: args),
       );
     case keranjangPage:
       return MaterialPageRoute(

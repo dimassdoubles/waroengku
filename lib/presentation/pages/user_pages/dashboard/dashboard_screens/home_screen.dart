@@ -238,6 +238,9 @@ class Header extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 4,
+              ),
               Text(
                 "Hi $name,",
                 style: const TextStyle(

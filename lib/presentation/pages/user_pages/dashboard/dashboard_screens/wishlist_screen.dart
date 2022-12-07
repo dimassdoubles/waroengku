@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/usecases/string_extension.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
 import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
 import 'package:waroengku/presentation/blocs/category/cat_event.dart';
 import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/presentation/blocs/product/product_bloc.dart';
-import 'package:waroengku/presentation/blocs/product/product_event.dart';
-import 'package:waroengku/presentation/blocs/product/product_state.dart';
 import 'package:waroengku/presentation/blocs/wishlist/wish_state.dart';
 import 'package:waroengku/presentation/widgets/user_widgets/wishlist_item.dart';
 import '../../../../../injection_container.dart';
@@ -16,8 +12,6 @@ import '../../../../../share/routes.dart';
 import '../../../../../share/styles/colors.dart';
 import '../../../../blocs/wishlist/wish_bloc.dart';
 import '../../../../blocs/wishlist/wish_event.dart';
-import '../../../../widgets/user_widgets/product_item.dart';
-import '../../../../widgets/user_widgets/search_bar.dart';
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({
@@ -125,7 +119,6 @@ class WishlistContent extends StatelessWidget {
       bloc: getIt<WishlistBloc>(),
       builder: (context, wishState) {
         if (wishState is WishlistLoaded) {
-          
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: GridView(
@@ -179,7 +172,7 @@ class Header extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, orderDetailPage);
+              Navigator.pushNamed(context, keranjangPage);
             },
             child: const Icon(
               Icons.shopping_cart,

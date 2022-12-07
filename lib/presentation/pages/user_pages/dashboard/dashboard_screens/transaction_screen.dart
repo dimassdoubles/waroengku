@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:waroengku/domain/usecases/loading_widget.dart';
+import 'package:waroengku/injection_container.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
+import 'package:waroengku/presentation/blocs/cart/cart_bloc.dart';
+import 'package:waroengku/presentation/blocs/cart/cart_event.dart';
+import 'package:waroengku/presentation/blocs/cart/cart_state.dart';
+import 'package:waroengku/presentation/blocs/transaction/transaction_event.dart';
+import 'package:waroengku/presentation/blocs/transaction/transaction_state.dart';
+import 'package:waroengku/presentation/widgets/user_widgets/transaction_item.dart';
 
 import '../../../../../share/routes.dart';
 import '../../../../../share/styles/colors.dart';
+import '../../../../blocs/transaction/transaction_bloc.dart';
 
 class TransactionScreen extends StatelessWidget {
   const TransactionScreen({super.key});
@@ -28,10 +40,37 @@ class TransactionScreen extends StatelessWidget {
             ),
           ),
         ),
-        const Expanded(
-          child: Center(
-            child: Text("Fitur Belum Selesai"),
-          ),
+        Expanded(
+          child: BlocBuilder(
+              bloc: getIt<AuthBloc>(),
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return BlocBuilder(
+                    bloc: getIt<TransactionBloc>(),
+                    builder: (context, tranState) {
+                      if (tranState is TransactionLoaded) {
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              ...tranState.transactions.map(
+                                (e) => TransactionItem(transaction: e),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      getIt<TransactionBloc>().add(
+                        TransactionGet(token: authState.user.token),
+                      );
+                      return const LoadingWidget();
+                    },
+                  );
+                }
+                return const SizedBox();
+              }),
         ),
       ],
     );
@@ -50,19 +89,14 @@ class Header extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                "Daftar Transaksi",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ],
+          const Text(
+            "Daftar Transaksi",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.start,
           ),
           InkWell(
             onTap: () {

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:waroengku/domain/entity/detail_transaction.dart';
+import 'package:waroengku/domain/entity/product.dart';
 import 'package:waroengku/domain/entity/transaction.dart';
 import 'package:waroengku/share/const/base_url.dart';
 import 'package:waroengku/share/errors/exceptions.dart';
@@ -25,7 +26,15 @@ class TransactionRemoteDataSourceImpl extends TransactionRemoteDataSource {
           final pivot = datas[i]["products"][j]["pivot"];
           detailTransactions.add(
             DetailTransaction(
-                productId: pivot["product_id"], quantity: pivot["qty"]),
+                product: Product(
+                  categoryId: datas[i]["products"][j]["category_id"],
+                  description: datas[i]["products"][j]["deskripsi"],
+                  id: datas[i]["products"][j]["id"],
+                  image: datas[i]["products"][j]["image"],
+                  name: datas[i]["products"][j]["name"],
+                  price: datas[i]["products"][j]["harga"],
+                  stock: datas[i]["products"][j]["stock"],
+                ), quantity: pivot["qty"],),
           );
         }
         listTransaction.add(
