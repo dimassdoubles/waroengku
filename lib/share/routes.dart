@@ -62,8 +62,9 @@ Route<dynamic> controller(RouteSettings settings) {
         ),
       );
     case detailPage:
+      final product = settings.arguments as Product;
       return MaterialPageRoute(
-        builder: (context) => const DetailPage(),
+        builder: (context) => DetailPage(product: product),
       );
     case dashboardPage:
       return MaterialPageRoute(

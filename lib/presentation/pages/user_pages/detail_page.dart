@@ -1,75 +1,174 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/share/routes.dart';
+import 'package:waroengku/domain/entity/product.dart';
+import 'package:waroengku/share/styles/colors.dart';
+
+import '../../widgets/user_widgets/favorite_button.dart';
+// import 'package:waroengku/presentation/pages/home_page.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({
+  Product product;
+  DetailPage({
     Key? key,
+    required this.product,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
-          onPressed: () => Navigator.of(context).pop(dashboardPage),
+          onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           "Detail Product",
-          style: TextStyle(color: Colors.black, fontSize: 15),
         ),
-        actions: <Widget>[
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Image.asset(
-              "images/Shopping cart.jpg",
+            padding: EdgeInsets.only(right: 16),
+            child: Icon(
+              Icons.shopping_cart_rounded,
+              size: 30,
+              color: kPrimaryColor,
             ),
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(
-                10.0,
-              ),
-              width: 240,
-              height: 280,
-              child: Card(
-                color: Colors.white,
-                elevation: 7,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "images/Beras.jpg",
-                          width: double.tryParse('7000'),
-                        ),
-                        const Text(
-                          "Beras 5 Kg Cap\nHoki",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+      body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          ListView(
+            children: [
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      color: Colors.grey[100],
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.network(product.image),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  product.name,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              FavoriteButton(productId: product.id),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const Text(
+                            "IDR",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            "Rp ${product.price}",
+                            style: const TextStyle(
+                                color: kPrimaryColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Divider(
+                            color: Colors.grey,
+                          ),
+                          const Text(
+                            "Stock Barang: ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            "${product.stock}",
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const Text(
+                            "Deskripsi: ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            product.description,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 86,
+                    ),
+                  ],
                 ),
               ),
+            ],
+          ),
+          Container(
+            color: kPrimaryColor,
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.add_shopping_cart_rounded,
+                  size: 24,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  'Tambahkan Ke Keranjang',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

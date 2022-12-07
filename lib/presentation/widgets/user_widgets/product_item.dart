@@ -13,7 +13,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, detailPage),
+      onTap: () => Navigator.pushNamed(context, detailPage, arguments: product),
       child: SizedBox(
         width: double.infinity,
         child: AspectRatio(

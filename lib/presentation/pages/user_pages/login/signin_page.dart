@@ -77,6 +77,10 @@ class _SignInPageState extends State<SignInPage> {
                     password: "kelompok1",
                   ),
                   // AuthLogin(
+                  //   email: "admin@admin.com",
+                  //   password: "admin123",
+                  // ),
+                  // AuthLogin(
                   //   email: emailController.text,
                   //   password: passwordController.text,
                   // ),
