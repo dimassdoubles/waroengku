@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:waroengku/domain/entity/product.dart';
+import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
+import '../../widgets/user_widgets/create_cart_button.dart';
 import '../../widgets/user_widgets/favorite_button.dart';
 // import 'package:waroengku/presentation/pages/home_page.dart';
 
@@ -25,13 +27,18 @@ class DetailPage extends StatelessWidget {
         title: const Text(
           "Detail Product",
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Icon(
-              Icons.shopping_cart_rounded,
-              size: 30,
-              color: kPrimaryColor,
+            padding: const EdgeInsets.only(right: 16),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, keranjangPage);
+              },
+              child: const Icon(
+                Icons.shopping_cart_rounded,
+                size: 30,
+                color: kPrimaryColor,
+              ),
             ),
           ),
         ],
@@ -142,32 +149,7 @@ class DetailPage extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            color: kPrimaryColor,
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.add_shopping_cart_rounded,
-                  size: 24,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  'Tambahkan Ke Keranjang',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
+          CreateCartButton(productId: product.id, quantity: 1),
         ],
       ),
     );

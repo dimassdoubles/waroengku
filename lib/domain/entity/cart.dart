@@ -1,15 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:waroengku/domain/entity/product.dart';
 
 class Cart extends Equatable {
-  final int _id, _productId, _userId, _quantity;
+  final int _id, _userId, _quantity;
+  final Product _product;
 
   const Cart({
     required int id,
-    required int productId,
+    required Product product,
     required int userId,
     required int quantity,
   })  : _id = id,
-        _productId = productId,
+        _product = product,
         _userId = userId,
         _quantity = quantity;
 
@@ -25,14 +27,14 @@ class Cart extends Equatable {
     return _id;
   }
 
-  int get productId {
-    return _productId;
+  Product get product {
+    return _product;
   }
 
   @override
   List<Object?> get props => [
         _id,
-        _productId,
+        _product,
         _userId,
         _quantity,
       ];

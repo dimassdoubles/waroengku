@@ -6,7 +6,7 @@ import 'package:waroengku/presentation/pages/admin_pages/edit_kategori.dart';
 import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
 import 'package:waroengku/presentation/pages/admin_pages/tambah_katalog.dart';
 import 'package:waroengku/presentation/pages/admin_pages/tambah_kategori.dart';
-import 'package:waroengku/presentation/pages/user_pages/keranjangs_page.dart';
+import 'package:waroengku/presentation/pages/user_pages/keranjang_page.dart';
 import 'package:waroengku/presentation/pages/user_pages/order_details.dart';
 
 import '../presentation/pages/user_pages/detail_page.dart';
@@ -34,7 +34,7 @@ Route<dynamic> controller(RouteSettings settings) {
       );
     case keranjangPage:
       return MaterialPageRoute(
-        builder: (context) => const KeranjangsPage(),
+        builder: (context) => KeranjangPage(),
       );
     case editKatalogPage:
       final args = settings.arguments as Product;

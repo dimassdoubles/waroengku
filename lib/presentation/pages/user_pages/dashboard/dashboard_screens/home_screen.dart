@@ -262,7 +262,7 @@ class Header extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, orderDetailPage);
+              Navigator.pushNamed(context, keranjangPage);
             },
             child: const Icon(
               Icons.shopping_cart,

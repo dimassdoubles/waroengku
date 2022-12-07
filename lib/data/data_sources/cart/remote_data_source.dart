@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:waroengku/domain/entity/cart.dart';
+import 'package:waroengku/domain/entity/product.dart';
 import 'package:waroengku/share/const/base_url.dart';
 import 'package:waroengku/share/errors/exceptions.dart';
 
@@ -23,7 +24,15 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
         listCart.add(
           Cart(
             id: datas[i]["id"],
-            productId: datas[i]["product_id"],
+            product: Product(
+              id: datas[i]["product"]["id"],
+              categoryId: datas[i]["product"]["category_id"],
+              description: datas[i]["product"]["deskripsi"],
+              image: datas[i]["product"]["image"],
+              name: datas[i]["product"]["name"],
+              price: datas[i]["product"]["harga"],
+              stock: datas[i]["product"]["stock"],
+            ),
             userId: datas[i]["user_id"],
             quantity: datas[i]["qty"],
           ),
