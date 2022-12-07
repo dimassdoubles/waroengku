@@ -6,8 +6,10 @@ import 'package:waroengku/presentation/pages/admin_pages/edit_kategori.dart';
 import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
 import 'package:waroengku/presentation/pages/admin_pages/tambah_katalog.dart';
 import 'package:waroengku/presentation/pages/admin_pages/tambah_kategori.dart';
+import 'package:waroengku/presentation/pages/user_pages/checkout_page.dart';
 import 'package:waroengku/presentation/pages/user_pages/keranjang_page.dart';
 import 'package:waroengku/presentation/pages/user_pages/order_details.dart';
+import 'package:waroengku/presentation/pages/user_pages/success_page.dart';
 
 import '../presentation/pages/user_pages/detail_page.dart';
 import '../presentation/pages/user_pages/dashboard/dashboard_page.dart';
@@ -25,9 +27,19 @@ const String editKategoriPage = "edit-kategori";
 const String editKatalogPage = "edit-katalog";
 const String keranjangPage = "keranjang-page";
 const String orderDetailPage = "order-detail-page";
+const String checkoutPage = "checkout-page";
+const String successPage = "success-page'";
 
 Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
+    case successPage:
+      return MaterialPageRoute(
+        builder: (context) => SuccessPage(),
+      );
+    case checkoutPage:
+      return MaterialPageRoute(
+        builder: (context) => CheckoutPage(),
+      );
     case orderDetailPage:
       return MaterialPageRoute(
         builder: (context) => OrderDetailsPage(),

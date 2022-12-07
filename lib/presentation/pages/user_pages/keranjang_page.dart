@@ -10,7 +10,10 @@ import 'package:waroengku/presentation/blocs/cart/cart_state.dart';
 import 'package:waroengku/presentation/pages/admin_pages/admin_edit_katalog.dart';
 import 'package:waroengku/presentation/pages/user_pages/success_page.dart';
 import 'package:waroengku/presentation/widgets/user_widgets/cart_item.dart';
+import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
+
+import '../../widgets/user_widgets/checkout_button.dart';
 
 class KeranjangPage extends StatefulWidget {
   const KeranjangPage({super.key});
@@ -36,6 +39,9 @@ class _KeranjangPageState extends State<KeranjangPage> {
             bloc: getIt<AuthBloc>(),
             builder: (context, authState) {
               if (authState is Authenticated) {
+                getIt<CartBloc>().add(
+                  CartGet(token: authState.user.token),
+                );
                 return BlocBuilder(
                   bloc: getIt<CartBloc>(),
                   builder: (context, cartState) {
@@ -51,6 +57,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
                         ],
                       );
                     }
+                    print("mengambil cart nih");
                     getIt<CartBloc>().add(
                       CartGet(
                         token: authState.user.token,
@@ -63,59 +70,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
               return const SizedBox();
             },
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            color: kPrimaryColor,
-            child: SizedBox(
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Total',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        'Rp 200.000',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      "Checkout",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          CheckoutButton(),
         ],
       ),
     );

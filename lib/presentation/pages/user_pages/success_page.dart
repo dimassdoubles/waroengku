@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
+import 'package:waroengku/share/routes.dart';
 
 import 'package:waroengku/share/styles/colors.dart';
 
@@ -11,59 +12,53 @@ class SuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(40),
                 ),
               ),
-              width: 500,
+              width: double.infinity,
               child: Image.asset(
                 "assets/images/succes.png",
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
+          ),
+          Expanded(
+            child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(
+                  const Text(
                     "YAY!",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    " Pesananmu siap diantar\n Jangan lupa untuk membayar\n dengan uang yang pas ya.",
+                  const Text(
+                    "Pesananmu siap diantar, jangan lupa untuk membayar dengan uang yang pas ya.",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
-                  SizedBox(
-                    height: 50,
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeAdminPage(
-                                    initialIndex: 0,
-                                  )));
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        dashboardPage,
+                        (route) => false,
+                      );
                     },
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      child: Text(
-                        "Continue Shopping",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 15,
+                        horizontal: 20,
                       ),
                       height: 50,
                       width: 200,
@@ -71,13 +66,21 @@ class SuccessPage extends StatelessWidget {
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
+                      child: const Text(
+                        "Continue Shopping",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   )
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
