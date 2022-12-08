@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/usecases/create_category.dart';
-import 'package:waroengku/domain/usecases/delete_category.dart';
-import 'package:waroengku/domain/usecases/get_categories.dart';
-import 'package:waroengku/domain/usecases/update_category.dart';
-import 'package:waroengku/presentation/blocs/category/cat_event.dart';
-import 'package:waroengku/presentation/blocs/category/cat_state.dart';
+import '../../../domain/usecases/create_category.dart';
+import '../../../domain/usecases/delete_category.dart';
+import '../../../domain/usecases/get_categories.dart';
+import '../../../domain/usecases/update_category.dart';
+import 'cat_event.dart';
+import 'cat_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   GetCategories getCategories;

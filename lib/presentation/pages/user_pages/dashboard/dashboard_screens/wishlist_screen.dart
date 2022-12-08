@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
-import 'package:waroengku/presentation/blocs/category/cat_event.dart';
-import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/presentation/blocs/wishlist/wish_state.dart';
-import 'package:waroengku/presentation/widgets/user_widgets/wishlist_item.dart';
+import '../../../../blocs/auth/auth_bloc.dart';
+import '../../../../blocs/auth/auth_state.dart';
+import '../../../../blocs/category/cat_bloc.dart';
+import '../../../../blocs/category/cat_event.dart';
+import '../../../../blocs/category/cat_state.dart';
+import '../../../../blocs/wishlist/wish_state.dart';
+import '../../../../widgets/user_widgets/wishlist_item.dart';
 import '../../../../../injection_container.dart';
 import '../../../../../share/routes.dart';
 import '../../../../../share/styles/colors.dart';
@@ -65,7 +65,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                         bloc: getIt<WishlistBloc>(),
                         builder: (context, wishState) {
                           if (wishState is WishlistLoaded) {
-                            return WishlistContent();
+                            return const WishlistContent();
                           }
                           getIt<WishlistBloc>().add(
                             WishlistGet(
@@ -109,7 +109,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
 }
 
 class WishlistContent extends StatelessWidget {
-  WishlistContent({
+  const WishlistContent({
     Key? key,
   }) : super(key: key);
 

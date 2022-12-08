@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/usecases/loading_widget.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_bloc.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_event.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_state.dart';
-import 'package:waroengku/presentation/pages/admin_pages/admin_edit_katalog.dart';
-import 'package:waroengku/presentation/pages/user_pages/success_page.dart';
-import 'package:waroengku/presentation/widgets/user_widgets/cart_item.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../domain/usecases/loading_widget.dart';
+import '../../../injection_container.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/cart/cart_bloc.dart';
+import '../../blocs/cart/cart_event.dart';
+import '../../blocs/cart/cart_state.dart';
+import '../../widgets/user_widgets/cart_item.dart';
 
 import '../../widgets/user_widgets/checkout_button.dart';
 
@@ -57,7 +53,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
                         ],
                       );
                     }
-                    print("mengambil cart nih");
+                 
                     getIt<CartBloc>().add(
                       CartGet(
                         token: authState.user.token,
@@ -70,7 +66,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
               return const SizedBox();
             },
           ),
-          CheckoutButton(),
+          const CheckoutButton(),
         ],
       ),
     );

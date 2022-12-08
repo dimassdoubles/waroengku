@@ -1,6 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors, annotate_overrides
+
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -20,8 +21,8 @@ import '../../../domain/entity/transaction.dart';
 import '../../../domain/usecases/pick_image.dart';
 
 class ReviewsPage extends StatefulWidget {
-  Transaction transaction;
-  ReviewsPage({
+  final Transaction transaction;
+  const ReviewsPage({
     Key? key,
     required this.transaction,
   });
@@ -112,7 +113,6 @@ class _ReviewsPageState extends State<ReviewsPage> {
                         }
                       }
                       if (allFilled) {
-                        print("all filled");
                         getIt<ReviewBloc>().add(
                           ReviewCreate(
                             token: authState.user.token,
@@ -167,10 +167,10 @@ class _ReviewsPageState extends State<ReviewsPage> {
 }
 
 class InputReview extends StatefulWidget {
-  RawReviewCubit rawRCubit;
-  int index;
-  Product product;
-  InputReview({
+  final RawReviewCubit rawRCubit;
+  final int index;
+  final Product product;
+  const InputReview({
     Key? key,
     required this.rawRCubit,
     required this.index,

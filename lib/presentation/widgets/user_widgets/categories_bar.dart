@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/domain/entity/category.dart';
-import 'package:waroengku/presentation/widgets/user_widgets/category_item.dart';
+import '../../../domain/entity/category.dart';
+import 'category_item.dart';
 
 class CategoriesBar extends StatelessWidget {
-  List<Category> categories;
-  CategoriesBar({
+  final List<Category> categories;
+  const CategoriesBar({
     Key? key,
     required this.categories,
   }) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/transaction.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/transaction.dart';
+import '../../share/errors/failures.dart';
 
 import '../repositories/transaction_repository.dart';
 

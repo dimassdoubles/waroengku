@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/domain/entity/transaction.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../domain/entity/transaction.dart';
+import '../../../share/routes.dart';
 
 class TransactionItem extends StatelessWidget {
-  Transaction transaction;
-  TransactionItem({
+  final Transaction transaction;
+  const TransactionItem({
     super.key,
     required this.transaction,
   });

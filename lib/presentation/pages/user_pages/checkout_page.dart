@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/share/routes.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -11,7 +10,7 @@ class CheckoutPage extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
@@ -19,7 +18,7 @@ class CheckoutPage extends StatelessWidget {
         ),
       ),
       body: ListView(
-          padding: EdgeInsets.all(
+          padding: const EdgeInsets.all(
             10.0,
           ),
           children: [
@@ -32,7 +31,9 @@ class CheckoutPage extends StatelessWidget {
                     padding: const EdgeInsets.all(7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[Text("Your Addres")],
+                      children: const [
+                        Text("Your Addres"),
+                      ],
                     ),
                   ),
                 ],
@@ -45,15 +46,15 @@ class CheckoutPage extends StatelessWidget {
                   width: 500,
                   height: 100,
                   child: Card(
-                      color: Color.fromARGB(255, 235, 231, 231),
+                      color: const Color.fromARGB(255, 235, 231, 231),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(10),
+                          const Padding(
+                            padding: EdgeInsets.all(10),
                             child: Text(
                               'Alamat',
                               style: TextStyle(
@@ -64,10 +65,10 @@ class CheckoutPage extends StatelessWidget {
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+                            children:const <Widget>[
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 5, left: 10),
+                                     EdgeInsets.only(top: 5, left: 10),
                                 child: Text(
                                   'Jalan Melati, Jakarta',
                                   style: TextStyle(
@@ -76,13 +77,13 @@ class CheckoutPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const Divider(
+                            Divider(
                                 color: Colors.black,
                                 height: 25,
                                 thickness: 1,
                                 indent: 5,
                                 endIndent: 5,
-                              ),
+                              )  ,
                             ],
                           )
                         ],
@@ -97,15 +98,15 @@ class CheckoutPage extends StatelessWidget {
                   width: 500,
                   height: 100,
                   child: Card(
-                      color: Color.fromARGB(255, 235, 231, 231),
+                      color: const Color.fromARGB(255, 235, 231, 231),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(10),
+                          const Padding(
+                            padding: EdgeInsets.all(10),
                             child: Text(
                               'Nama Gedung/ Patokan',
                               style: TextStyle(
@@ -116,9 +117,9 @@ class CheckoutPage extends StatelessWidget {
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+                            children: const <Widget>[
                               Padding(
-                                padding: const EdgeInsets.only(
+                                padding: EdgeInsets.only(
                                   top: 5,
                                   left: 10,
                                 ),
@@ -130,7 +131,7 @@ class CheckoutPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const Divider(
+                              Divider(
                                 color: Colors.black,
                                 height: 25,
                                 thickness: 1,
@@ -153,7 +154,7 @@ class CheckoutPage extends StatelessWidget {
                       padding: const EdgeInsets.all(7),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
+                          children: const <Widget>[
                             Text(
                               "Your Product",
                               style: TextStyle(
@@ -170,7 +171,7 @@ class CheckoutPage extends StatelessWidget {
                           width: 500,
                           height: 200,
                           child: Card(
-                            color: Color.fromARGB(255, 235, 231, 231),
+                            color: const Color.fromARGB(255, 235, 231, 231),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),
@@ -182,7 +183,7 @@ class CheckoutPage extends StatelessWidget {
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[],
+                                      children: const <Widget>[],
                                     ),
                                   ),
                                   Padding(
@@ -191,14 +192,14 @@ class CheckoutPage extends StatelessWidget {
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
+                                        children: const [
                                           Text(
                                             "Beras Pandan Wangi",
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          const Text(
+                                          Text(
                                             "Rp. 27.000",
                                             style: TextStyle(
                                               color: Colors.red,
@@ -220,44 +221,44 @@ class CheckoutPage extends StatelessWidget {
                                         Container(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 4, horizontal: 10),
+                                          height: 30,
+                                          width: 30,
+                                          decoration: const BoxDecoration(
+                                              color: Colors.red),
                                           child: const Text(
                                             "-",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: Colors.white),
                                           ),
-                                          height: 30,
-                                          width: 30,
-                                          decoration: const BoxDecoration(
-                                              color: Colors.red),
                                         ),
                                         Container(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 4, horizontal: 10),
+                                          height: 30,
+                                          width: 30,
+                                          decoration: const BoxDecoration(
+                                              color: Colors.red),
                                           child: const Text(
                                             "1",
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white),
                                           ),
-                                          height: 30,
-                                          width: 30,
-                                          decoration: const BoxDecoration(
-                                              color: Colors.red),
                                         ),
                                         Container(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 4, horizontal: 10),
+                                          height: 30,
+                                          width: 30,
+                                          decoration: const BoxDecoration(
+                                              color: Colors.red),
                                           child: const Text(
                                             "+",
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white),
                                           ),
-                                          height: 30,
-                                          width: 30,
-                                          decoration: const BoxDecoration(
-                                              color: Colors.red),
                                         ),
                                       ],
                                     ),
@@ -278,7 +279,7 @@ class CheckoutPage extends StatelessWidget {
                       padding: const EdgeInsets.all(7),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
+                          children: const <Widget>[
                             Text(
                               "Metode Pembayaran",
                               style: TextStyle(
@@ -295,7 +296,7 @@ class CheckoutPage extends StatelessWidget {
                           width: 500,
                           height: 75,
                           child: Card(
-                            color: Color.fromARGB(255, 235, 231, 231),
+                            color: const Color.fromARGB(255, 235, 231, 231),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(9),
                             ),
@@ -307,12 +308,12 @@ class CheckoutPage extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
+                                      children: const <Widget>[
                                         Icon(
                                           Icons.attach_money_outlined,
                                           color: Colors.red,
                                         ),
-                                        const Text(
+                                        Text(
                                           'COD (Bayar di Tempat)',
                                           style: TextStyle(),
                                         ),
@@ -335,7 +336,7 @@ class CheckoutPage extends StatelessWidget {
                       padding: const EdgeInsets.all(7),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
+                          children: const <Widget>[
                             Text(
                               "Rincian Pembayaran",
                               style: TextStyle(
@@ -352,7 +353,7 @@ class CheckoutPage extends StatelessWidget {
                             width: 500,
                             height: 200,
                             child: Card(
-                              color: Color.fromARGB(255, 235, 231, 231),
+                              color: const Color.fromARGB(255, 235, 231, 231),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(9),
                               ),
@@ -364,7 +365,7 @@ class CheckoutPage extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
+                                        children: const <Widget>[
                                           Text(
                                             "Subtotal untuk produk",
                                           ),
@@ -382,7 +383,7 @@ class CheckoutPage extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
-                                              children: <Widget>[
+                                              children: const <Widget>[
                                                 Text("Biaya Layanan"),
                                                 Text("Rp. 1.000"),
                                               ],
@@ -399,7 +400,7 @@ class CheckoutPage extends StatelessWidget {
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
-                                                    children: <Widget>[
+                                                    children: const <Widget>[
                                                       Text("Ongkos Kirim"),
                                                       Text("Rp. 5.000"),
                                                     ],
@@ -424,7 +425,7 @@ class CheckoutPage extends StatelessWidget {
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .spaceBetween,
-                                                          children: <Widget>[
+                                                          children: const <Widget>[
                                                             Text(
                                                                 "Total Pembayaran"),
                                                             Text("Rp. 51.000"),
@@ -451,18 +452,16 @@ class CheckoutPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OutlinedButton(
-                          child: Text('Buat Pesanan'),
                           style: OutlinedButton.styleFrom(
-                            primary: Colors.white,
                             backgroundColor: Colors.red,
-                            onSurface: Colors.orange,
-                            minimumSize: Size(430, 60),
-                            side: BorderSide(
+                            minimumSize: const Size(430, 60),
+                            side: const BorderSide(
                               color: Colors.red,
                               width: 1,
                             ),
                           ),
                           onPressed: () {},
+                          child: const Text('Buat Pesanan'),
                         ),
                       ]),
                 ),

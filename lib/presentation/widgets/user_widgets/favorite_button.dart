@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/entity/wishlist.dart';
-import 'package:waroengku/domain/usecases/loading_widget.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/wishlist/wish_bloc.dart';
-import 'package:waroengku/presentation/blocs/wishlist/wish_event.dart';
-import 'package:waroengku/presentation/blocs/wishlist/wish_state.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../injection_container.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/wishlist/wish_bloc.dart';
+import '../../blocs/wishlist/wish_event.dart';
+import '../../blocs/wishlist/wish_state.dart';
+import '../../../share/styles/colors.dart';
 
 class FavoriteButton extends StatelessWidget {
-  int productId;
-  FavoriteButton({
+  final int productId;
+  const FavoriteButton({
     Key? key,
     required this.productId,
   }) : super(key: key);
@@ -32,13 +30,11 @@ class FavoriteButton extends StatelessWidget {
                     .toList()
                     .isNotEmpty;
                 if (isFavorited) {
-                  print("sampai di sini");
                   final wishlist = wishState.wishlist
                       .where(
                         (element) => element.product.id == productId,
                       )
                       .toList()[0];
-                  print("mungkin errornya di atas dah");
                   return InkWell(
                     onTap: () {
                       getIt<WishlistBloc>().add(

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:waroengku/domain/entity/category.dart';
+import '../../../domain/entity/category.dart';
 
 abstract class ProductEvent {}
 

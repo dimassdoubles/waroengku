@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:waroengku/domain/entity/detail_transaction.dart';
-import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/domain/entity/transaction.dart';
-import 'package:waroengku/share/const/base_url.dart';
-import 'package:waroengku/share/errors/exceptions.dart';
+import '../../../domain/entity/detail_transaction.dart';
+import '../../../domain/entity/product.dart';
+import '../../../domain/entity/transaction.dart';
+import '../../../share/const/base_url.dart';
+import '../../../share/errors/exceptions.dart';
 
 abstract class TransactionRemoteDataSource {
   Future<List<Transaction>> getTransaction(String token);

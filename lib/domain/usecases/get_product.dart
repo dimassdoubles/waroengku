@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/domain/repositories/product_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/product.dart';
+import '../repositories/product_repository.dart';
+import '../../share/errors/failures.dart';
 
 import '../entity/category.dart';
 

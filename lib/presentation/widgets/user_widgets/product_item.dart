@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../domain/entity/product.dart';
+import '../../../share/routes.dart';
+import '../../../share/styles/colors.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;

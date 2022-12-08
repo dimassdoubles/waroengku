@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/domain/entity/category.dart';
-import 'package:waroengku/domain/usecases/string_extension.dart';
+import '../../../domain/entity/category.dart';
+import '../../../domain/usecases/string_extension.dart';
 
 class CategoryItem extends StatelessWidget {
-  Category category;
-  CategoryItem({
+  final Category category;
+  const CategoryItem({
     Key? key,
     required this.category,
   }) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:waroengku/domain/usecases/create_wishlist.dart';
-import 'package:waroengku/domain/usecases/delete_wishlist.dart';
-import 'package:waroengku/domain/usecases/get_wishlist.dart';
-import 'package:waroengku/presentation/blocs/wishlist/wish_event.dart';
-import 'package:waroengku/presentation/blocs/wishlist/wish_state.dart';
+import '../../../domain/usecases/create_wishlist.dart';
+import '../../../domain/usecases/delete_wishlist.dart';
+import '../../../domain/usecases/get_wishlist.dart';
+import 'wish_event.dart';
+import 'wish_state.dart';
 
 class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   GetWishlist getWishlist;
@@ -16,16 +16,13 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   }) : super(WishlistUnload()) {
     on<WishlistGet>(
       (event, emit) async {
-        print("mencoba get wihlist");
         emit(WishlistOnload());
         final result = await getWishlist(event.token);
         result.fold(
           (l) {
-            print("get wishlist gagal");
             emit(WishlistUnload());
           },
           (r) {
-            print("berhasil get wishlist di bloc");
             emit(WishlistLoaded(r));
           },
         );

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:waroengku/share/const/base_url.dart';
-import 'package:waroengku/share/errors/exceptions.dart';
+import '../../../share/const/base_url.dart';
+import '../../../share/errors/exceptions.dart';
 
 abstract class ReviewRemoteDataSource {
   Future<void> createReview(

@@ -1,7 +1,7 @@
-import 'package:waroengku/domain/entity/transaction.dart';
+import '../../domain/entity/transaction.dart';
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/repositories/transaction_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../../domain/repositories/transaction_repository.dart';
+import '../../share/errors/failures.dart';
 
 import '../../share/errors/exceptions.dart';
 import '../data_sources/transaction/remote_data_source.dart';

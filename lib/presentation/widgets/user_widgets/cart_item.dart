@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/entity/cart.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_bloc.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_event.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../domain/entity/cart.dart';
+import '../../../injection_container.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/cart/cart_bloc.dart';
+import '../../blocs/cart/cart_event.dart';
+import '../../../share/routes.dart';
+import '../../../share/styles/colors.dart';
 
 class CartItem extends StatelessWidget {
-  Cart cart;
-  CartItem({
+  final Cart cart;
+ const  CartItem({
     super.key,
     required this.cart,
   });

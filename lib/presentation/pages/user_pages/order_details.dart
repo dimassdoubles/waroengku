@@ -1,11 +1,13 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:waroengku/domain/entity/detail_transaction.dart';
 import 'package:waroengku/domain/entity/transaction.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
 class OrderDetailsPage extends StatefulWidget {
-  Transaction transaction;
-  OrderDetailsPage({super.key, required this.transaction});
+  final Transaction transaction;
+  const OrderDetailsPage({super.key, required this.transaction});
   @override
   _OrderDetailsPageState createState() => _OrderDetailsPageState();
 }
@@ -150,8 +152,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 }
 
 class DetailTransactionItem extends StatelessWidget {
-  DetailTransaction detailTransaction;
-  DetailTransactionItem({
+  final DetailTransaction detailTransaction;
+  const DetailTransactionItem({
     Key? key,
     required this.detailTransaction,
   }) : super(key: key);

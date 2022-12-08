@@ -1,5 +1,3 @@
-import 'package:waroengku/domain/usecases/delete_product.dart';
-
 class RegisterException implements Exception {
   String message;
   RegisterException(this.message);

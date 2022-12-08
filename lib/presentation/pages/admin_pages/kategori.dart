@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
@@ -11,6 +13,8 @@ import '../../../injection_container.dart';
 import '../../widgets/admin_widgets/kategori_item.dart';
 
 class KategoriPage extends StatefulWidget {
+  const KategoriPage({super.key});
+
   @override
   _KategoriPageState createState() => _KategoriPageState();
 }

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../../share/errors/failures.dart';
 
 abstract class ReviewRepository {
   Future<Either<Failure, void>> createReview(

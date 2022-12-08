@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_event.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/auth/auth_event.dart';
+import '../../../../share/styles/colors.dart';
 
 import '../../../../injection_container.dart';
 
@@ -44,13 +41,16 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               SizedBox(
                 child: TextFormField(
                   controller: nameController,
@@ -139,7 +139,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   alignment: Alignment.center,
                   child: const Text(
                     "Daftar",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

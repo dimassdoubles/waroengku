@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../../share/errors/failures.dart';
 
 import '../entity/cart.dart';
 import '../repositories/cart_repository.dart';

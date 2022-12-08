@@ -1,14 +1,14 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/pages/user_pages/dashboard/dashboard_screens/account_screen.dart';
-import 'package:waroengku/presentation/pages/user_pages/dashboard/dashboard_screens/transaction_screen.dart';
-import 'package:waroengku/presentation/pages/user_pages/dashboard/dashboard_screens/wishlist_screen.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../../injection_container.dart';
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/auth/auth_state.dart';
+import 'dashboard_screens/account_screen.dart';
+import 'dashboard_screens/transaction_screen.dart';
+import 'dashboard_screens/wishlist_screen.dart';
+import '../../../../share/routes.dart';
+import '../../../../share/styles/colors.dart';
 
 import 'dashboard_screens/home_screen.dart';
 
@@ -26,15 +26,15 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget returnScreen(int navIndex) {
     switch (navIndex) {
       case 0:
-        return HomeScreen();
+        return const HomeScreen();
       case 1:
-        return WishlistScreen();
+        return const WishlistScreen();
       case 2:
-        return TransactionScreen();
+        return const TransactionScreen();
       case 3:
-        return AccountScreen();
+        return const AccountScreen();
       default:
-        return HomeScreen();
+        return const HomeScreen();
     }
   }
 

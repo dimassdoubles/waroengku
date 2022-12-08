@@ -1,10 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:waroengku/presentation/pages/admin_pages/home_admin.dart';
-import 'package:waroengku/share/routes.dart';
+import '../../../share/routes.dart';
 
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../share/styles/colors.dart';
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({super.key});

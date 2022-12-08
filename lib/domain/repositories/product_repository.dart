@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/domain/entity/review.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/product.dart';
+import '../entity/review.dart';
+import '../../share/errors/failures.dart';
 
 import '../entity/category.dart';
 

@@ -2,18 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/usecases/pick_image.dart';
-import 'package:waroengku/domain/usecases/string_extension.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
-import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/presentation/blocs/product/product_bloc.dart';
-import 'package:waroengku/presentation/blocs/product/product_event.dart';
-import 'package:waroengku/presentation/blocs/product/product_state.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../domain/usecases/pick_image.dart';
+import '../../../domain/usecases/string_extension.dart';
+import '../../../injection_container.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/category/cat_bloc.dart';
+import '../../blocs/category/cat_state.dart';
+import '../../blocs/product/product_bloc.dart';
+import '../../blocs/product/product_event.dart';
+import '../../blocs/product/product_state.dart';
+import '../../../share/routes.dart';
+import '../../../share/styles/colors.dart';
 
 class TambahKatalog extends StatefulWidget {
   const TambahKatalog({super.key});
@@ -402,10 +402,7 @@ class _TambahKatalogState extends State<TambahKatalog> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    print(nameController.text);
-                                    print(stockController.text);
-                                    print(descriptionController.text);
-                                    print(categoryId);
+                              
                                     if (image != null && categoryId > -1) {
                                       productBloc.add(
                                         ProductCreate(

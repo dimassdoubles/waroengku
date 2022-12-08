@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/pages/admin_pages/kategori.dart';
-import 'package:waroengku/share/routes.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import 'kategori.dart';
+import '../../../share/routes.dart';
 
 import '../../../injection_container.dart';
 import '../../../share/styles/colors.dart';
@@ -11,8 +11,8 @@ import '../../blocs/auth/auth_event.dart';
 import 'katalog.dart';
 
 class HomeAdminPage extends StatefulWidget {
-  int initialIndex;
-  HomeAdminPage({super.key, this.initialIndex = 0});
+  final int initialIndex;
+  const HomeAdminPage({super.key, this.initialIndex = 0});
 
   @override
   State<HomeAdminPage> createState() => _HomeAdminPageState();
@@ -43,10 +43,10 @@ class _HomeAdminPageState extends State<HomeAdminPage>
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (tabController.index == 0) {
-            print("pergi ke tambah katalog");
+           
             Navigator.pushNamed(context, tambahKatalogPage);
           } else if (tabController.index == 1) {
-            print("pergi ke tambah kategori");
+          
             Navigator.pushNamed(context, tambahKategoriPage);
           }
         },
@@ -57,7 +57,7 @@ class _HomeAdminPageState extends State<HomeAdminPage>
       body: BlocConsumer(
         listener: (context, state) {
           if (state is AuthLoad) {
-            print("Hallo hallo bandung");
+          
             showDialog(
               context: context,
               barrierDismissible: false,
@@ -172,9 +172,9 @@ class _HomeAdminPageState extends State<HomeAdminPage>
                   Expanded(
                     child: TabBarView(
                       controller: tabController,
-                      children: [
-                        KatalogPage(),
-                        KategoriPage(),
+                      children:const [
+                         KatalogPage(),
+                         KategoriPage(),
                       ],
                     ),
                   )

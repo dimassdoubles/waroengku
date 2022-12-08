@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/usecases/loading_widget.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_bloc.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_event.dart';
-import 'package:waroengku/presentation/blocs/cart/cart_state.dart';
+import '../../../injection_container.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/cart/cart_bloc.dart';
+import '../../blocs/cart/cart_event.dart';
+import '../../blocs/cart/cart_state.dart';
 
 import '../../../share/styles/colors.dart';
 
 class CreateCartButton extends StatelessWidget {
-  int productId, quantity;
-  CreateCartButton({
+  final int productId, quantity;
+  const CreateCartButton({
     Key? key,
     required this.productId,
     required this.quantity,

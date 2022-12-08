@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:waroengku/domain/entity/product.dart';
+import 'product.dart';
 
 class Cart extends Equatable {
   final int _id, _userId, _quantity;

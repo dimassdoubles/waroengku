@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:waroengku/data/data_sources/product/remote_data_source.dart';
-import 'package:waroengku/domain/entity/category.dart';
-import 'package:waroengku/domain/entity/product.dart';
+import '../data_sources/product/remote_data_source.dart';
+import '../../domain/entity/category.dart';
+import '../../domain/entity/product.dart';
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/review.dart';
-import 'package:waroengku/domain/repositories/product_repository.dart';
-import 'package:waroengku/share/errors/exceptions.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../../domain/entity/review.dart';
+import '../../domain/repositories/product_repository.dart';
+import '../../share/errors/exceptions.dart';
+import '../../share/errors/failures.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
   ProductRemoteDataSource remoteDataSource;

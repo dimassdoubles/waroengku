@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_event.dart';
+import '../../../../../injection_container.dart';
+import '../../../../blocs/auth/auth_bloc.dart';
+import '../../../../blocs/auth/auth_event.dart';
 
 import '../../../../../share/routes.dart';
 import '../../../../../share/styles/colors.dart';
@@ -69,17 +69,6 @@ class AccountScreen extends StatelessWidget {
                     Center(
                       child: Text(
                         state.user.email,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Center(
-                      child: Text(
-                        state.user.phone,
                         style: const TextStyle(
                           color: Colors.grey,
                         ),

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/entity/wishlist.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../entity/wishlist.dart';
+import '../../share/errors/failures.dart';
 
 import '../repositories/wishlist_repository.dart';
 

@@ -1,4 +1,4 @@
-import 'package:waroengku/domain/entity/raw_review.dart';
+import '../../../domain/entity/raw_review.dart';
 
 abstract class ReviewEvent {}
 

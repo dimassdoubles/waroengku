@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:waroengku/domain/usecases/get_user_logged_in.dart';
-import 'package:waroengku/domain/usecases/is_sign_in.dart';
-import 'package:waroengku/domain/usecases/login.dart';
-import 'package:waroengku/domain/usecases/logout.dart';
-import 'package:waroengku/domain/usecases/register.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_event.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
+import '../../../domain/usecases/get_user_logged_in.dart';
+import '../../../domain/usecases/is_sign_in.dart';
+import '../../../domain/usecases/login.dart';
+import '../../../domain/usecases/logout.dart';
+import '../../../domain/usecases/register.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IsSignIn isSignIn;
@@ -37,15 +37,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthLogin>(
       (event, emit) async {
         emit(AuthLoad());
-        print("mencoba login");
         final result = await login(
           email: event.email,
           password: event.password,
         );
-        print("berhasil login");
         result.fold(
           (l) {
-            print("Login Gagal");
             return emit(AuthFail());
           },
           (r) => emit(Authenticated(r)),

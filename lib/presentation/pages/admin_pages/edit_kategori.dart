@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/entity/category.dart';
-import 'package:waroengku/domain/usecases/string_extension.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
-import 'package:waroengku/presentation/blocs/category/cat_event.dart';
-import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/share/routes.dart';
+import '../../../domain/entity/category.dart';
+import '../../../domain/usecases/string_extension.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/category/cat_bloc.dart';
+import '../../blocs/category/cat_event.dart';
+import '../../blocs/category/cat_state.dart';
+import '../../../share/routes.dart';
 
 import '../../../injection_container.dart';
 import '../../../share/styles/colors.dart';
 
 class EditKategoriPage extends StatefulWidget {
-  Category category;
-  EditKategoriPage({super.key, required this.category});
+  final Category category;
+  const EditKategoriPage({super.key, required this.category});
 
   @override
   State<EditKategoriPage> createState() => _EditKategoriPageState();
@@ -43,7 +43,7 @@ class _EditKategoriPageState extends State<EditKategoriPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("masuk sini lagi");
+   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffBBCFE4),
@@ -158,7 +158,7 @@ class _EditKategoriPageState extends State<EditKategoriPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: InkWell(
                         onTap: () {
-                          print(nameController.text);
+                     
                           catBloc.add(
                             CategoryEdit(
                               token: authState.user.token,

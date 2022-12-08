@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'dart:io';
 
-import 'package:waroengku/domain/repositories/review_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../../domain/repositories/review_repository.dart';
+import '../../share/errors/failures.dart';
 
 import '../../share/errors/exceptions.dart';
 import '../data_sources/review/remote_data_source.dart';

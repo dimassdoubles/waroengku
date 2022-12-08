@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/repositories/cart_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../repositories/cart_repository.dart';
+import '../../share/errors/failures.dart';
 
 class CreateCart {
   CartRepository repository;

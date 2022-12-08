@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:waroengku/domain/entity/product.dart';
+import 'product.dart';
 
 class Wishlist extends Equatable {
   final int _id, _userId;

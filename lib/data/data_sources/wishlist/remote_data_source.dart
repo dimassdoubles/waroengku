@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/domain/entity/wishlist.dart';
-import 'package:waroengku/share/errors/exceptions.dart';
+import '../../../domain/entity/product.dart';
+import '../../../domain/entity/wishlist.dart';
+import '../../../share/errors/exceptions.dart';
 
 import '../../../share/const/base_url.dart';
 
@@ -21,9 +21,7 @@ class WishlistRemoteDataSourceImpl extends WishlistRemoteDataSource {
       final response = await dio.get(endPoint);
       final datas = response.data["data"];
       List<Wishlist> listWishlist = [];
-      print(datas.length);
       for (int i = 0; i < datas.length; i++) {
-        print(datas[i]["product"]["name"]);
         Wishlist wishlist = Wishlist(
           id: datas[i]["id"],
           product: Product(

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/repositories/review_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../repositories/review_repository.dart';
+import '../../share/errors/failures.dart';
 
 class DeleteReview {
   ReviewRepository repository;

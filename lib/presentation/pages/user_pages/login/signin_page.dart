@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_event.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/auth/auth_event.dart';
+import '../../../../share/styles/colors.dart';
 
 import '../../../../injection_container.dart';
 
@@ -73,17 +73,9 @@ class _SignInPageState extends State<SignInPage> {
                 authBloc.add(
                   // untuk memudahkan login sebagai user
                   AuthLogin(
-                    email: "kelompok1@gmail.com",
-                    password: "kelompok1",
+                    email: emailController.text,
+                    password: passwordController.text,
                   ),
-                  // AuthLogin(
-                  //   email: "admin@admin.com",
-                  //   password: "admin123",
-                  // ),
-                  // AuthLogin(
-                  //   email: emailController.text,
-                  //   password: passwordController.text,
-                  // ),
                 );
               },
               child: Container(
@@ -96,7 +88,11 @@ class _SignInPageState extends State<SignInPage> {
                 alignment: Alignment.center,
                 child: const Text(
                   "Login",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

@@ -1,4 +1,4 @@
-import 'package:waroengku/domain/entity/user.dart';
+import '../entity/user.dart';
 
 class GetUserLoggedIn {
   User call() {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/pages/user_pages/login/signin_page.dart';
-import 'package:waroengku/presentation/pages/user_pages/login/signup_page.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../../injection_container.dart';
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/auth/auth_state.dart';
+import 'signin_page.dart';
+import 'signup_page.dart';
+import '../../../../share/routes.dart';
+import '../../../../share/styles/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,11 +21,23 @@ class _LoginPageState extends State<LoginPage>
   late TabController tabController;
   late AuthBloc authBloc;
 
+  int tab = 0;
+
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    tabController.animation!.addListener(tabListener);
     authBloc = getIt<AuthBloc>();
+  }
+
+  void tabListener() {
+    if (tab != tabController.animation!.value.round()) {
+    
+      setState(() {
+        tab = tabController.animation!.value.round();
+      });
+    }
   }
 
   @override
@@ -72,38 +84,59 @@ class _LoginPageState extends State<LoginPage>
               }
             }
           },
-          child: Column(
-            children: [
-              Container(
-                child: Lottie.asset(
-                  "assets/lotties/108403-customer-need.json",
-                  height: MediaQuery.of(context).size.height / 3,
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  child: (tab == 0)
+                      ? Lottie.asset(
+                          "assets/lotties/signin2.json",
+                          height: MediaQuery.of(context).size.height / 3,
+                        )
+                      : Lottie.asset(
+                          "assets/lotties/signin.json",
+                          height: MediaQuery.of(context).size.height / 3,
+                        ),
                 ),
-              ),
-              TabBar(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                controller: tabController,
-                labelColor: kPrimaryColor,
-                indicatorColor: kPrimaryColor,
-                tabs: const [
-                  Tab(
-                    text: ("Sign In"),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.withOpacity(0.3),
+                        width: 1.5,
+                      ),
+                    ),
                   ),
-                  Tab(
-                    text: ("Sign Up"),
+                  child: TabBar(
+                    controller: tabController,
+                    labelColor: Colors.black,
+                    labelStyle: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    indicatorColor: kPrimaryColor,
+                    tabs: const [
+                      Tab(
+                        text: ("Sign In"),
+                      ),
+                      Tab(
+                        text: ("Sign Up"),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: tabController,
-                  children: const [
-                    SignInPage(),
-                    SignUpPage(),
-                  ],
                 ),
-              ),
-            ],
+                Expanded(
+                  child: TabBarView(
+                    controller: tabController,
+                    children: const [
+                      SignInPage(),
+                      SignUpPage(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

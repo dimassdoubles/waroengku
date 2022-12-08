@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/repositories/transaction_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../repositories/transaction_repository.dart';
+import '../../share/errors/failures.dart';
 
 class CreateTransaction {
   TransactionRepository repository;

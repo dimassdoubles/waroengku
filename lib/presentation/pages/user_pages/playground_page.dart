@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:waroengku/data/data_sources/product/remote_data_source.dart';
-import 'package:waroengku/data/data_sources/review/remote_data_source.dart';
-import 'package:waroengku/domain/usecases/pick_image.dart';
+import '../../../data/data_sources/product/remote_data_source.dart';
+import '../../../data/data_sources/review/remote_data_source.dart';
+import '../../../domain/usecases/pick_image.dart';
 
 class PlaygroundPage extends StatefulWidget {
   const PlaygroundPage({super.key});
@@ -71,7 +71,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                 ? ElevatedButton(
                     onPressed: () async {
                       await createReview(image!);
-                      print("selesai");
+                    
                     },
                     child: const SizedBox(
                       width: double.infinity,
@@ -85,9 +85,9 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                 ? Center(
                     child: ElevatedButton(
                       onPressed: () async {
-                        print("Mencoba buat barang");
+                       
                         await createBarang(image!);
-                        print("Selesai buat barang");
+                      
                       },
                       child: const SizedBox(
                         width: double.infinity,
@@ -101,9 +101,9 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             (image != null)
                 ? ElevatedButton(
                     onPressed: () async {
-                      print("Mencoba update barang");
+                  
                       await updateBarang(image!);
-                      print("Selesai update barang");
+                   
                     },
                     child: const SizedBox(
                       width: double.infinity,

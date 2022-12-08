@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:waroengku/domain/repositories/product_repository.dart';
-import 'package:waroengku/share/errors/failures.dart';
+import '../repositories/product_repository.dart';
+import '../../share/errors/failures.dart';
 
 class UpdateProduct {
   ProductRepository repository;

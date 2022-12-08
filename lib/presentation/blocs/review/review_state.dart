@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:waroengku/domain/entity/review.dart';
+import '../../../domain/entity/review.dart';
 
 abstract class ReviewState extends Equatable {}
 
@@ -19,7 +19,7 @@ class ReviewFinish extends ReviewState {
 }
 
 class ReviewLoaded extends ReviewState {
-  List<Review> reviews;
+  final List<Review> reviews;
   ReviewLoaded({required this.reviews});
   @override
   List<Object?> get props => [reviews];

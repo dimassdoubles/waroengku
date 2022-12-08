@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/domain/usecases/string_extension.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
-import 'package:waroengku/presentation/blocs/category/cat_event.dart';
-import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/presentation/blocs/product/product_bloc.dart';
-import 'package:waroengku/presentation/blocs/product/product_event.dart';
-import 'package:waroengku/presentation/blocs/product/product_state.dart';
+import '../../../../../domain/usecases/string_extension.dart';
+import '../../../../blocs/auth/auth_bloc.dart';
+import '../../../../blocs/auth/auth_state.dart';
+import '../../../../blocs/category/cat_bloc.dart';
+import '../../../../blocs/category/cat_event.dart';
+import '../../../../blocs/category/cat_state.dart';
+import '../../../../blocs/product/product_bloc.dart';
+import '../../../../blocs/product/product_event.dart';
+import '../../../../blocs/product/product_state.dart';
 import '../../../../../injection_container.dart';
 import '../../../../../share/routes.dart';
 import '../../../../../share/styles/colors.dart';
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               labelColor: Colors.black,
                               indicatorColor: Colors.black,
                               onTap: (value) {
-                                print(value);
+                                
                               },
                               tabs: [
                                 const Tab(
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             return TabBarView(
                               controller: tabController,
                               children: [
-                                HomeContent(),
+                                const HomeContent(),
                                 ...catState.categories.map(
                                   (e) => HomeContent(
                                     categoryId: e.id,
@@ -160,8 +160,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 }
 
 class HomeContent extends StatelessWidget {
-  int? categoryId;
-  HomeContent({
+  final int? categoryId;
+  const HomeContent({
     Key? key,
     this.categoryId,
   }) : super(key: key);
@@ -200,7 +200,7 @@ class HomeContent extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: GridView(
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 16),
               // runSpacing: 16,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

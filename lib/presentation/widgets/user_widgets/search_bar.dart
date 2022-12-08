@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:waroengku/domain/entity/category.dart';
-import 'package:waroengku/share/styles/colors.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({

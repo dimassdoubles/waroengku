@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waroengku/injection_container.dart';
@@ -14,6 +16,8 @@ import 'package:waroengku/share/styles/colors.dart';
 import '../../widgets/admin_widgets/katalog_item.dart';
 
 class KatalogPage extends StatefulWidget {
+  const KatalogPage({super.key});
+
   @override
   _KatalogPageState createState() => _KatalogPageState();
 }

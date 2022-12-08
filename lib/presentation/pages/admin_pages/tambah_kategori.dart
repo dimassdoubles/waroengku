@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/category/cat_bloc.dart';
-import 'package:waroengku/presentation/blocs/category/cat_event.dart';
-import 'package:waroengku/presentation/blocs/category/cat_state.dart';
-import 'package:waroengku/share/routes.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/category/cat_bloc.dart';
+import '../../blocs/category/cat_event.dart';
+import '../../blocs/category/cat_state.dart';
+import '../../../share/routes.dart';
 
 import '../../../injection_container.dart';
 import '../../../share/styles/colors.dart';
@@ -81,9 +81,7 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
                     },
                   );
                 } else if (catState is CategoryLoaded) {
-                  print("pindah ke halaman admin");
-                  // Navigator.pop(context);
-                  // Navigator.pop(context);
+                  
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     homeAdmin,
@@ -155,7 +153,7 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: InkWell(
                         onTap: () {
-                          print(nameController.text);
+                        
                           catBloc.add(
                             CategoryCreate(
                               token: authState.user.token,

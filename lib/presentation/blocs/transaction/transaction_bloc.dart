@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:waroengku/domain/usecases/create_transaction.dart';
-import 'package:waroengku/domain/usecases/get_transaction.dart';
-import 'package:waroengku/presentation/blocs/transaction/transaction_event.dart';
-import 'package:waroengku/presentation/blocs/transaction/transaction_state.dart';
+import '../../../domain/usecases/create_transaction.dart';
+import '../../../domain/usecases/get_transaction.dart';
+import 'transaction_event.dart';
+import 'transaction_state.dart';
 
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   CreateTransaction createTransaction;
@@ -27,11 +27,9 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         final result = await createTransaction(event.token, event.address);
         result.fold(
           (l) {
-            print("transaksi gagal");
             emit(TransactionFail());
           },
           (r) {
-            print("transaksi berhasil");
             emit(TransactionSuccess());
           },
         );

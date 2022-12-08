@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:waroengku/domain/entity/detail_transaction.dart';
+import 'detail_transaction.dart';
 
 class Transaction extends Equatable {
   final int _id, _total, _userId;

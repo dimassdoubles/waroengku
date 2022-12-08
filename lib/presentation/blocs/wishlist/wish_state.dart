@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:waroengku/domain/entity/wishlist.dart';
+import '../../../domain/entity/wishlist.dart';
 
 abstract class WishlistState extends Equatable {}
 
@@ -13,7 +13,7 @@ class WishlistOnload extends WishlistState {
 }
 
 class WishlistLoaded extends WishlistState {
-  List<Wishlist> wishlist;
+  final List<Wishlist> wishlist;
   WishlistLoaded(this.wishlist);
 
   @override

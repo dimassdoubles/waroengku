@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:waroengku/domain/entity/product.dart';
-import 'package:waroengku/domain/entity/review.dart';
-import 'package:waroengku/injection_container.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
-import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
-import 'package:waroengku/presentation/blocs/review/review_bloc.dart';
-import 'package:waroengku/presentation/blocs/review/review_event.dart';
-import 'package:waroengku/presentation/blocs/review/review_state.dart';
-import 'package:waroengku/share/routes.dart';
-import 'package:waroengku/share/styles/colors.dart';
+import '../../../domain/entity/product.dart';
+import '../../../domain/entity/review.dart';
+import '../../../injection_container.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_state.dart';
+import '../../blocs/review/review_bloc.dart';
+import '../../blocs/review/review_event.dart';
+import '../../blocs/review/review_state.dart';
+import '../../../share/routes.dart';
+import '../../../share/styles/colors.dart';
 
 import '../../widgets/user_widgets/create_cart_button.dart';
 import '../../widgets/user_widgets/favorite_button.dart';
 // import 'package:waroengku/presentation/pages/home_page.dart';
 
 class DetailPage extends StatelessWidget {
-  Product product;
-  DetailPage({
+  final Product product;
+ const  DetailPage({
     Key? key,
     required this.product,
   }) : super(key: key);
@@ -170,8 +170,8 @@ class DetailPage extends StatelessWidget {
 }
 
 class Reviews extends StatelessWidget {
-  int productId;
-  Reviews({
+  final int productId;
+  const Reviews({
     Key? key,
     required this.productId,
   }) : super(key: key);
@@ -182,7 +182,7 @@ class Reviews extends StatelessWidget {
       bloc: getIt<AuthBloc>(),
       builder: (context, authState) {
         if (authState is Authenticated) {
-          print("mencoba mengambil review");
+         
           getIt<ReviewBloc>().add(
             ReviewGet(
               token: authState.user.token,
@@ -225,8 +225,8 @@ class Reviews extends StatelessWidget {
 }
 
 class ReviewItem extends StatelessWidget {
-  Review review;
-  ReviewItem({
+  final Review review;
+  const ReviewItem({
     Key? key,
     required this.review,
   }) : super(key: key);

@@ -1,12 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:waroengku/domain/usecases/create_review.dart';
-import 'package:waroengku/domain/usecases/get_review_by_product_id.dart';
-import 'package:waroengku/presentation/blocs/review/review_event.dart';
-import 'package:waroengku/presentation/blocs/review/review_state.dart';
-import 'dart:io';
-
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:path_provider/path_provider.dart';
+import '../../../domain/usecases/create_review.dart';
+import '../../../domain/usecases/get_review_by_product_id.dart';
+import 'review_event.dart';
+import 'review_state.dart';
 
 class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
   GetReviewByProductId getReviewByProductId;
@@ -35,24 +31,14 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
 
         // melakukan review setiap barang yang telah dipesan
         for (int i = 0; i < event.rawReeviews.length; i++) {
-          print("mereview $i");
-          final result = await createReview(
+          await createReview(
             token: event.token,
             image: event.rawReeviews[i].image!,
             productId: event.rawReeviews[i].productId,
             review: event.rawReeviews[i].review,
             star: event.rawReeviews[i].star,
           );
-          result.fold(
-            (l) => print("gagal mereview $i"),
-            (r) => print(
-              "berhasil mereview $i",
-            ),
-          );
         }
-
-        print("finish review");
-
         emit(ReviewFinish());
       },
     );
