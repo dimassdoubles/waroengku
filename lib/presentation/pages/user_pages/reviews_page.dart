@@ -1,12 +1,23 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:waroengku/domain/entity/detail_transaction.dart';
 import 'package:waroengku/domain/entity/product.dart';
+import 'package:waroengku/injection_container.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
+import 'package:waroengku/presentation/blocs/review/review_bloc.dart';
+import 'package:waroengku/presentation/blocs/review/review_event.dart';
+import 'package:waroengku/presentation/blocs/review/review_state.dart';
 import 'package:waroengku/presentation/cubits/raw_review_cubit.dart';
+import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
 import '../../../domain/entity/transaction.dart';
+import '../../../domain/usecases/pick_image.dart';
 
 class ReviewsPage extends StatefulWidget {
   Transaction transaction;
@@ -58,31 +69,96 @@ class _ReviewsPageState extends State<ReviewsPage> {
           const SizedBox(
             height: 24,
           ),
-          InkWell(
-            onTap: () {
-              for (int i = 0; i < rawRCubit.state.length; i++) {
-                print(rawRCubit.state[i].productId);
-                print(rawRCubit.state[i].star);
-                print(rawRCubit.state[i].review);
+          BlocBuilder(
+            bloc: getIt<AuthBloc>(),
+            builder: (context, authState) {
+              if (authState is Authenticated) {
+                return BlocListener(
+                  bloc: getIt<ReviewBloc>(),
+                  listener: (context, revState) {
+                    if (revState is ReviewOnload) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                CircularProgressIndicator(
+                                  color: kPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    } else if (revState is ReviewFinish) {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        dashboardPage,
+                        (route) => false,
+                      );
+                    }
+                  },
+                  child: InkWell(
+                    onTap: () {
+                      bool allFilled = true;
+                      for (int i = 0; i < rawRCubit.state.length; i++) {
+                        if (rawRCubit.state[i].review == "" ||
+                            rawRCubit.state[i].image == null) {
+                          allFilled = false;
+                          break;
+                        }
+                      }
+                      if (allFilled) {
+                        print("all filled");
+                        getIt<ReviewBloc>().add(
+                          ReviewCreate(
+                            token: authState.user.token,
+                            rawReeviews: rawRCubit.state,
+                          ),
+                        );
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: kPrimaryColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "Bagikan Review",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               }
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                "Bagikan Review",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              return Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-            ),
+                child: const Text(
+                  "Bagikan Review",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -90,7 +166,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
   }
 }
 
-class InputReview extends StatelessWidget {
+class InputReview extends StatefulWidget {
   RawReviewCubit rawRCubit;
   int index;
   Product product;
@@ -102,14 +178,132 @@ class InputReview extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<InputReview> createState() => _InputReviewState();
+}
+
+class _InputReviewState extends State<InputReview> {
+  File? image;
+  //show popup dialog option pick image
+  void chooseImageSource() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          title: const Text('Please choose media to select'),
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height / 6,
+            child: Column(
+              children: [
+                ElevatedButton(
+                  //if user click this button, user can upload image from gallery
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    final imagePicked = await pickImage(context);
+                    if (imagePicked != null) {
+                      widget.rawRCubit.setImage(
+                        index: widget.index,
+                        value: imagePicked,
+                      );
+                      setState(() {
+                        image = imagePicked;
+                      });
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kPrimaryColor,
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.image),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text('From Gallery'),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  //if user click this button. user can upload image from camera
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    final imagePicked = await pickImage(context, camera: true);
+                    if (imagePicked != null) {
+                      setState(() {
+                        image = imagePicked;
+                      });
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kPrimaryColor,
+                  ),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.camera_alt_rounded),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text('From Camera'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          InkWell(
+            onTap: () {
+              chooseImageSource();
+            },
+            child: SizedBox(
+              width: double.infinity,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: (image == null)
+                    ? Container(
+                        color: Colors.grey[300],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.camera_alt_rounded,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "Tambah Gambar Produk",
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Image.file(
+                        image!,
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
           Text(
-            product.name,
+            widget.product.name,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -129,11 +323,12 @@ class InputReview extends StatelessWidget {
                     color: Colors.amber,
                   ),
               onRatingUpdate: (rating) {
-                rawRCubit.setStar(index: index, value: rating.round());
+                widget.rawRCubit
+                    .setStar(index: widget.index, value: rating.round());
               }),
           TextField(
             onChanged: (value) {
-              rawRCubit.setReview(index: index, value: value);
+              widget.rawRCubit.setReview(index: widget.index, value: value);
             },
           ),
         ],
