@@ -42,6 +42,9 @@ class TransactionScreen extends StatelessWidget {
               bloc: getIt<AuthBloc>(),
               builder: (context, authState) {
                 if (authState is Authenticated) {
+                  getIt<TransactionBloc>().add(
+                    TransactionGet(token: authState.user.token),
+                  );
                   return BlocBuilder(
                     bloc: getIt<TransactionBloc>(),
                     builder: (context, tranState) {
@@ -59,9 +62,6 @@ class TransactionScreen extends StatelessWidget {
                           ),
                         );
                       }
-                      getIt<TransactionBloc>().add(
-                        TransactionGet(token: authState.user.token),
-                      );
                       return const LoadingWidget();
                     },
                   );
