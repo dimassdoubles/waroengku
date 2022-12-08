@@ -29,6 +29,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
       bloc: getIt<AuthBloc>(),
       builder: (context, authState) {
         if (authState is Authenticated) {
+          getIt<WishlistBloc>().add(
+            WishlistGet(
+              token: authState.user.token,
+            ),
+          );
           return BlocBuilder(
             bloc: getIt<CategoryBloc>(),
             builder: (context, catState) {
@@ -67,11 +72,6 @@ class _WishlistScreenState extends State<WishlistScreen> {
                           if (wishState is WishlistLoaded) {
                             return const WishlistContent();
                           }
-                          getIt<WishlistBloc>().add(
-                            WishlistGet(
-                              token: authState.user.token,
-                            ),
-                          );
                           return Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
