@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:waroengku/domain/entity/product.dart';
+import 'package:waroengku/domain/entity/review.dart';
+import 'package:waroengku/injection_container.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_bloc.dart';
+import 'package:waroengku/presentation/blocs/auth/auth_state.dart';
+import 'package:waroengku/presentation/blocs/review/review_bloc.dart';
+import 'package:waroengku/presentation/blocs/review/review_event.dart';
+import 'package:waroengku/presentation/blocs/review/review_state.dart';
 import 'package:waroengku/share/routes.dart';
 import 'package:waroengku/share/styles/colors.dart';
 
@@ -108,7 +117,7 @@ class DetailPage extends StatelessWidget {
                           const Text(
                             "Stock Barang: ",
                             style: TextStyle(
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(
@@ -126,7 +135,7 @@ class DetailPage extends StatelessWidget {
                           const Text(
                             "Deskripsi: ",
                             style: TextStyle(
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(
@@ -138,6 +147,10 @@ class DetailPage extends StatelessWidget {
                               color: Colors.grey,
                             ),
                           ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Reviews(productId: product.id),
                         ],
                       ),
                     ),
@@ -150,6 +163,118 @@ class DetailPage extends StatelessWidget {
             ],
           ),
           CreateCartButton(productId: product.id, quantity: 1),
+        ],
+      ),
+    );
+  }
+}
+
+class Reviews extends StatelessWidget {
+  int productId;
+  Reviews({
+    Key? key,
+    required this.productId,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+      bloc: getIt<AuthBloc>(),
+      builder: (context, authState) {
+        if (authState is Authenticated) {
+          print("mencoba mengambil review");
+          getIt<ReviewBloc>().add(
+            ReviewGet(
+              token: authState.user.token,
+              productId: productId,
+            ),
+          );
+          return BlocBuilder(
+            bloc: getIt<ReviewBloc>(),
+            builder: (context, revState) {
+              if (revState is ReviewLoaded) {
+                if (revState.reviews.isNotEmpty) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Reviews (${revState.reviews.length})',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Divider(),
+                      ...revState.reviews.map((e) => ReviewItem(review: e)),
+                    ],
+                  );
+                }
+                return const SizedBox();
+              }
+
+              return const SizedBox();
+            },
+          );
+        }
+        return const SizedBox();
+      },
+    );
+  }
+}
+
+class ReviewItem extends StatelessWidget {
+  Review review;
+  ReviewItem({
+    Key? key,
+    required this.review,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            review.authorName,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          RatingBarIndicator(
+            rating: review.star.toDouble(),
+            direction: Axis.horizontal,
+            itemCount: 5,
+            itemSize: 16,
+            itemBuilder: (context, index) => const Icon(
+              Icons.star_rounded,
+              color: Colors.amber,
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          AspectRatio(
+            aspectRatio: 1,
+            child: SizedBox(
+              width: double.infinity,
+              child: Image.network(
+                review.image,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(review.review),
+          const Divider(),
         ],
       ),
     );
