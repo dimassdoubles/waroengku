@@ -72,9 +72,13 @@ class _SignInPageState extends State<SignInPage> {
               onTap: () {
                 authBloc.add(
                   // untuk memudahkan login sebagai user
+                  // AuthLogin(
+                  //   email: emailController.text,
+                  //   password: passwordController.text,
+                  // ),
                   AuthLogin(
-                    email: emailController.text,
-                    password: passwordController.text,
+                    email: "admin@admin.com",
+                    password: "admin123",
                   ),
                 );
               },

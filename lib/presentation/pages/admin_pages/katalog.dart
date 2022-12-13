@@ -34,10 +34,18 @@ class _KatalogPageState extends State<KatalogPage> {
         bloc: authBloc,
         builder: (context, authState) {
           if (authState is Authenticated) {
+            catBloc.add(CategoryGet(authState.user.token));
+
             return BlocBuilder(
               bloc: catBloc,
               builder: (context, catState) {
                 if (catState is CategoryLoaded) {
+                  prodBloc.add(
+                    ProductGet(
+                      token: authState.user.token,
+                      categories: catState.categories,
+                    ),
+                  );
                   return BlocBuilder(
                     bloc: prodBloc,
                     builder: (context, prodState) {
@@ -62,12 +70,6 @@ class _KatalogPageState extends State<KatalogPage> {
                           ],
                         );
                       } else {
-                        prodBloc.add(
-                          ProductGet(
-                            token: authState.user.token,
-                            categories: catState.categories,
-                          ),
-                        );
                         return Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +84,6 @@ class _KatalogPageState extends State<KatalogPage> {
                     },
                   );
                 }
-                catBloc.add(CategoryGet(authState.user.token));
                 return const SizedBox();
               },
             );

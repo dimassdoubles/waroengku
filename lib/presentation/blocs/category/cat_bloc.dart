@@ -23,28 +23,28 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         emit(CategoryOnload());
         final result = await getCategories(event.token);
         result.fold(
-          (l) => emit(CategoryUnload()),
+          (l) => emit(CategoryFail()),
           (r) => emit(CategoryLoaded(r)),
         );
       },
     );
     on<CategoryCreate>(
       (event, emit) async {
-        emit(CategoryOnload());
+        emit(CategoryCreateOnload());
         await createCategory(
           name: event.name,
           token: event.token,
         );
         final result = await getCategories(event.token);
         result.fold(
-          (l) => emit(CategoryUnload()),
+          (l) => emit(CategoryFail()),
           (r) => emit(CategoryLoaded(r)),
         );
       },
     );
     on<CategoryEdit>(
       (event, emit) async {
-        emit(CategoryOnload());
+        emit(CategoryEditOnload());
         await updateCategory(
           newName: event.newName,
           id: event.id,
@@ -52,7 +52,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         );
         final result = await getCategories(event.token);
         result.fold(
-          (l) => emit(CategoryUnload()),
+          (l) => emit(CategoryFail()),
           (r) => emit(CategoryLoaded(r)),
         );
       },
@@ -63,7 +63,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         await deleteCategory(token: event.token, id: event.id);
         final result = await getCategories(event.token);
         result.fold(
-          (l) => emit(CategoryUnload()),
+          (l) => emit(CategoryFail()),
           (r) => emit(CategoryLoaded(r)),
         );
       },

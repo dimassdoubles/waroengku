@@ -43,10 +43,8 @@ class _HomeAdminPageState extends State<HomeAdminPage>
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (tabController.index == 0) {
-           
             Navigator.pushNamed(context, tambahKatalogPage);
           } else if (tabController.index == 1) {
-          
             Navigator.pushNamed(context, tambahKategoriPage);
           }
         },
@@ -57,7 +55,6 @@ class _HomeAdminPageState extends State<HomeAdminPage>
       body: BlocConsumer(
         listener: (context, state) {
           if (state is AuthLoad) {
-          
             showDialog(
               context: context,
               barrierDismissible: false,
@@ -172,9 +169,9 @@ class _HomeAdminPageState extends State<HomeAdminPage>
                   Expanded(
                     child: TabBarView(
                       controller: tabController,
-                      children:const [
-                         KatalogPage(),
-                         KategoriPage(),
+                      children: const [
+                        KatalogPage(),
+                        KategoriPage(),
                       ],
                     ),
                   )

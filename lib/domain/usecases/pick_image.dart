@@ -6,6 +6,7 @@ Future<File?> pickImage(BuildContext? context, {bool camera = false}) async {
   try {
     final XFile? file = await ImagePicker().pickImage(
       source: camera ? ImageSource.camera : ImageSource.gallery,
+      imageQuality: 25,
     );
     return File(file!.path);
   } catch (e) {

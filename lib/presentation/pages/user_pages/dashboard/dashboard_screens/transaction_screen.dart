@@ -50,15 +50,18 @@ class TransactionScreen extends StatelessWidget {
                     builder: (context, tranState) {
                       if (tranState is TransactionLoaded) {
                         return SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              ...tranState.transactions.map(
-                                (e) => TransactionItem(transaction: e),
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                ...tranState.transactions.map(
+                                  (e) => TransactionItem(transaction: e),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }

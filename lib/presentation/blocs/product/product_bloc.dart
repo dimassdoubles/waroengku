@@ -22,7 +22,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }) : super(ProductUnload()) {
     on<ProductCreate>(
       (event, emit) async {
-        emit(ProductOnload());
+        emit(ProductCreateOnload());
         final result = await createProduct(
           categoryId: event.categoryId,
           description: event.description,
@@ -33,8 +33,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           token: event.token,
         );
         result.fold(
-          (l) => emit(ProductUnload()),
-          (r) => emit(ProductUnload()),
+          (l) => emit(ProductFail()),
+          (r) => emit(ProductSuccess()),
         );
         // final result = await getProduct
       },
@@ -42,8 +42,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<ProductGet>(
       (event, emit) async {
         emit(ProductOnload());
-        final result =
-            await getProduct(token: event.token, categories: event.categories,);
+        final result = await getProduct(
+          token: event.token,
+          categories: event.categories,
+        );
         result.fold(
           (l) => emit(ProductUnload()),
           (r) => emit(ProductLoaded(r)),
@@ -67,7 +69,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     );
     on<ProductEdit>(
       (event, emit) async {
-        emit(ProductOnload());
+        emit(ProductEditOnload());
         await updateProduct(
           categoryId: event.categoryId,
           description: event.description,

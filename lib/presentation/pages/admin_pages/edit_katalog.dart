@@ -153,7 +153,7 @@ class _EditKatalogPageState extends State<EditKatalogPage> {
                   return BlocListener(
                     bloc: productBloc,
                     listener: (context, productState) {
-                      if (productState is ProductOnload) {
+                      if (productState is ProductEditOnload) {
                         showDialog(
                           context: context,
                           barrierDismissible: false,

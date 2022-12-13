@@ -39,10 +39,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       bloc: getIt<AuthBloc>(),
       builder: (context, authState) {
         if (authState is Authenticated) {
+          getIt<CategoryBloc>().add(CategoryGet(authState.user.token));
           return BlocBuilder(
             bloc: getIt<CategoryBloc>(),
             builder: (context, catState) {
               if (catState is CategoryLoaded) {
+                getIt<ProductBloc>().add(
+                  ProductGet(
+                    token: authState.user.token,
+                    categories: catState.categories,
+                  ),
+                );
                 tabController = TabController(
                   length: catState.categories.length + 1,
                   vsync: this,
@@ -82,9 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               isScrollable: true,
                               labelColor: Colors.black,
                               indicatorColor: Colors.black,
-                              onTap: (value) {
-                                
-                              },
+                              onTap: (value) {},
                               tabs: [
                                 const Tab(
                                   text: "All",
@@ -117,12 +122,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ],
                             );
                           }
-                          getIt<ProductBloc>().add(
-                            ProductGet(
-                              token: authState.user.token,
-                              categories: catState.categories,
-                            ),
-                          );
                           return Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +138,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ],
                 );
               }
-              getIt<CategoryBloc>().add(CategoryGet(authState.user.token));
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

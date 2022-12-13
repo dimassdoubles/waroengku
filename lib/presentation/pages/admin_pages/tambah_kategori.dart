@@ -63,7 +63,7 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
             return BlocListener(
               bloc: catBloc,
               listener: (context, catState) {
-                if (catState is CategoryOnload) {
+                if (catState is CategoryCreateOnload) {
                   showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -81,7 +81,6 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
                     },
                   );
                 } else if (catState is CategoryLoaded) {
-                  
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     homeAdmin,
@@ -153,7 +152,6 @@ class _TambahKategoriPageState extends State<TambahKategoriPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: InkWell(
                         onTap: () {
-                        
                           catBloc.add(
                             CategoryCreate(
                               token: authState.user.token,

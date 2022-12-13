@@ -8,7 +8,25 @@ class ProductUnload extends ProductState {
   List<Object?> get props => [];
 }
 
+class ProductSuccess extends ProductState {
+  @override
+  List<Object?> get props => [];
+}
+
+class ProductFail extends ProductState {
+  @override
+  List<Object?> get props => [];
+}
+
 class ProductOnload extends ProductState {
+  @override
+  List<Object?> get props => [];
+}
+class ProductCreateOnload extends ProductState {
+  @override
+  List<Object?> get props => [];
+}
+class ProductEditOnload extends ProductState {
   @override
   List<Object?> get props => [];
 }

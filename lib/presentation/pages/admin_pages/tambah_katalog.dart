@@ -144,7 +144,7 @@ class _TambahKatalogState extends State<TambahKatalog> {
                   return BlocListener(
                     bloc: productBloc,
                     listener: (context, productState) {
-                      if (productState is ProductOnload) {
+                      if (productState is ProductCreateOnload) {
                         showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -161,13 +161,15 @@ class _TambahKatalogState extends State<TambahKatalog> {
                             );
                           },
                         );
-                      } else if (productState is ProductLoaded) {
+                      } else if (productState is ProductSuccess) {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
                           homeAdmin,
                           (route) => false,
                           arguments: 0,
                         );
+                      } else if (productState is ProductFail) {
+                        Navigator.pop(context);
                       }
                     },
                     child: SingleChildScrollView(
@@ -402,7 +404,6 @@ class _TambahKatalogState extends State<TambahKatalog> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                              
                                     if (image != null && categoryId > -1) {
                                       productBloc.add(
                                         ProductCreate(

@@ -13,6 +13,20 @@ class CategoryOnload extends CategoryState {
   List<Object?> get props => [];
 }
 
+class CategoryCreateOnload extends CategoryState {
+  @override
+  List<Object?> get props => [];
+}
+class CategoryEditOnload extends CategoryState {
+  @override
+  List<Object?> get props => [];
+}
+
+class CategoryFail extends CategoryState {
+  @override
+  List<Object?> get props => [];
+}
+
 class CategoryLoaded extends CategoryState {
   final List<Category> categories;
   CategoryLoaded(this.categories);
