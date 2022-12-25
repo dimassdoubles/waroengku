@@ -1,16 +1,4 @@
 # waroengku
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Belum sempat bikin video demo, api yang disediakan tidak bisa diakses :(
+![image](https://user-images.githubusercontent.com/76572359/209475371-ed8abec1-0e15-4bc6-9554-3dfe5b25bac0.png)
